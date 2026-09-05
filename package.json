@@ -50,8 +50,7 @@
     "sanity-plugin-mux-input": "^5.0.12",
     "styled-components": "^6.1.13",
     "posthog-js": "^1.409.0",
-    
-    "@phosphor-icons/react": "^2.1.10"
+    "lucide-react": "^1.41.0"
   },
   "devDependencies": {
     "eslint": "^9.39.0",
