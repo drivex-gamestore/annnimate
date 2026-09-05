@@ -1,13 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-
-// NOTE: original module id: 522016
 import Link from 'next/link';
-
-// NOTE: original module id: 137410
-import CloseIcon from '@/components/icons/CloseIcon';
-
-// NOTE: original module id: 609104
+import CloseIcon from '@components/ui/CloseIcon';
 import {
   Dialog,
   DialogContent,
@@ -16,30 +10,15 @@ import {
   DialogDescription,
 } from '@/components/ui/Dialog';
 
-// NOTE: original module id: 687989
-import Button from '@/components/ui/Button';
-
-// NOTE: original module id: 870777
+import AnimatedButton from '@animations/components/AnimatedAnimatedButton';
 import Toggle from '@/components/ui/Toggle';
 
-// NOTE: original module id: 160725
 import {
   getConsent,
   defaultConsent,
   setConsent,
   dispatchConsentChanged,
-} from '@/utils/consent';
-
-// ── IDENTIFIER MAPPINGS ──────────────────────────────────────────────
-// c -> cookieCategories
-// u -> CookiePreferencesModal
-// e (prop) -> open
-// d (prop) -> onOpenChange
-// p -> consentState
-// f -> setConsentState
-// m -> handleSave
-// t, r (in onChange) -> checked, categoryId
-// ─────────────────────────────────────────────────────────────────────
+} from '@config/consent';
 
 const cookieCategories = [
   {
@@ -85,7 +64,7 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        showCloseButton={false}
+        showCloseAnimatedButton={false}
         className="!rounded-none !border-foreground/15 !bg-background !p-32 sm:!max-w-[560px] lg:!p-40"
       >
         <DialogClose
@@ -151,7 +130,7 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
 
         <div className="mt-24 flex flex-col gap-8">
           <div className="flex gap-8">
-            <Button
+            <AnimatedButton
               type="button"
               theme="light"
               size="xs"
@@ -166,8 +145,8 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
               className="flex-1"
             >
               Accept all
-            </Button>
-            <Button
+            </AnimatedButton>
+            <AnimatedButton
               type="button"
               theme="surface"
               size="xs"
@@ -182,9 +161,9 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
               className="flex-1"
             >
               Decline all
-            </Button>
+            </AnimatedButton>
           </div>
-          <Button
+          <AnimatedButton
             type="button"
             theme="brand"
             size="xs"
@@ -192,7 +171,7 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
             className="w-full"
           >
             Save preferences
-          </Button>
+          </AnimatedButton>
         </div>
       </DialogContent>
     </Dialog>

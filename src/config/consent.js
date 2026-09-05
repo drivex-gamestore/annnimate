@@ -22,10 +22,11 @@ export function setConsent(consentData) {
     })
   );
 
-  const expiryDate = new Date();
-  expiryDate.setDate(expiryDate.getDate() + 365);
+  const expires = new Date();
+  expires.setDate(expires.getDate() + 365);
 
-  let cookieString = `${COOKIE_NAME}=${encodeURIComponent(payload)}; path=/; expires=${expiryDate.toUTCString()}; SameSite=Lax`;
+  let cookieString = `${COOKIE_NAME}=${encodeURIComponent(payload)}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
+
   if (window.location.protocol === 'https:') {
     cookieString += '; Secure';
   }
@@ -33,28 +34,10 @@ export function setConsent(consentData) {
   document.cookie = cookieString;
 }
 
-export function getConsent() {
-  if (typeof document === 'undefined') return null;
-
-  const match = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith(`${COOKIE_NAME}=`));
-
-  if (!match) return null;
-
-  try {
-    const rawValue = match.split('=')[1];
-    const decoded = atob(decodeURIComponent(rawValue));
-    const parsed = JSON.parse(decoded);
-    if (parsed.version !== 1) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
 export function dispatchConsentChanged() {
-  window.dispatchEvent(new CustomEvent('annnimate:consent-changed'));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('annnimate:consent-changed'));
+  }
 }
 
 export function acceptAll() {
@@ -66,4 +49,26 @@ export function acceptAll() {
     method: 'explicit'
   });
   dispatchConsentChanged();
+}
+
+export function getConsent() {
+  if (typeof document === 'undefined') return null;
+
+  const cookie = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith(`${COOKIE_NAME}=`));
+
+  if (!cookie) return null;
+
+  try {
+    const encodedValue = cookie.split('=')[1];
+    const decodedValue = atob(decodeURIComponent(encodedValue));
+    const parsedData = JSON.parse(decodedValue);
+
+    if (parsedData.version !== 1) return null;
+
+    return parsedData;
+  } catch (err) {
+    return null;
+  }
 }

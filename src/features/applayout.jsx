@@ -1,13 +1,24 @@
+"use client"; 
+
+import { useState } from 'react';
 import PreloaderWrapper from '@animations/utils/PreloaderWrapper';
 import Header from '@features/layout/header/Header';
-export default async function AppLayout({ children }) {
+import CookiePreferencesModal from '@components/CookiePreferencesModal';
+
+export default function AppLayout({ children }) {
+  const [isCookieOpen, setIsCookieOpen] = useState(false);
+
   return (
     <>
       <PreloaderWrapper />
       <Header />
-        <main class="flex-1 relative z-[2] bg-background" data-transition-content="true">
-          {children}
-        </main>
+      <main className="flex-1 relative z-[2] bg-background" data-transition-content="true">
+        {children}
+      </main>
+      <CookiePreferencesModal 
+        open={isCookieOpen} 
+        onOpenChange={setIsCookieOpen} 
+      />
     </>
   );
 }
