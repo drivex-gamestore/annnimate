@@ -1,0 +1,501 @@
+"use client";
+
+import React, { useRef, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
+import { gsap, ScrambleTextPlugin } from "@lib/vendor"
+import { TransitionRouterProvider, RouterTransition } from "@providers/TransitionRouterProvider"
+import { useAnimation } from '@providers/AnimationProvider';
+import { getLayoutType } from "@/shared/getLayoutType"
+import { defaultChars } from "@config/defaultChars"
+import { setTransitionTarget, getTransitionTarget, getTransitionLabel } from "@features/transitions/transition"
+
+
+const TRANSITION_CONFIGS = {
+  app: {
+    mechanism: "fade",
+    leave: { duration: 0.3, ease: "power4.out" },
+    enter: { duration: 0.4, ease: "power4.out" }
+  },
+  sectionFade: {
+    mechanism: "fade",
+    leave: { duration: 0.35, ease: "power2.out" },
+    enter: { duration: 0.5, ease: "power2.out" }
+  },
+  marketing: {
+    mechanism: "panel",
+    cover: { duration: 0.6, ease: "expo.inOut" },
+    reveal: { duration: 0.8, ease: "expo.inOut" }
+  },
+  auth: null,
+  admin: {
+    mechanism: "fade",
+    leave: { duration: 0.3, ease: "power4.out" },
+    enter: { duration: 0.5, ease: "power4.out" }
+  },
+  standalone: {
+    mechanism: "panel",
+    cover: { duration: 0.6, ease: "expo.inOut" },
+    reveal: { duration: 0.8, ease: "expo.inOut" }
+  }
+};
+
+const DEFAULT_TRANSITION = {
+  mechanism: "panel",
+  cover: { duration: 0.6, ease: "expo.inOut" },
+  reveal: { duration: 0.8, ease: "expo.inOut" }
+};
+
+function getTransitionConfig(type) {
+  return type in TRANSITION_CONFIGS ? TRANSITION_CONFIGS[type] : DEFAULT_TRANSITION;
+}
+
+const CLIP_HIDDEN = "inset(50% 50% 50% 50%)";
+const CLIP_REVEALED = "inset(0% 0% 0% 0%)";
+
+function getClipPathCurve(progress) {
+  let t = 50 * progress;
+  let r = (50 - t).toFixed(3);
+  let n = (50 + t).toFixed(3);
+  let o = (50 - t).toFixed(3);
+  let a = (50 + t).toFixed(3);
+  return `polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, ${r}% ${o}%, ${r}% ${a}%, ${n}% ${a}%, ${n}% ${o}%, ${r}% ${o}%)`;
+}
+
+function TransitionOverlay() {
+  let baseClassName = "absolute inset-0 [will-change:clip-path]";
+  let defaultStyle = { clipPath: CLIP_HIDDEN };
+  let { revealed } = useAnimation();
+  
+  let overlayRef = useRef(null);
+  let textRef = useRef(null);
+  let timelineRef = useRef(null);
+  let timeoutRef = useRef(null);
+
+  let hideOverlay = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    if (timelineRef.current) {
+      timelineRef.current.kill();
+    }
+    timelineRef.current = null;
+
+    let overlayEl = overlayRef.current;
+    if (overlayEl) {
+      gsap.to(overlayEl, {
+        autoAlpha: 0,
+        duration: 0.3,
+        ease: "power2.in",
+        overwrite: true
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (revealed) {
+      hideOverlay();
+    }
+  }, [revealed, hideOverlay]);
+
+  useEffect(() => {
+    let handleCover = (e) => {
+      let overlayEl = overlayRef.current;
+      let textEl = textRef.current;
+      if (!overlayEl || !textEl) return;
+
+      let label = (e.detail?.label || "Loading").trim() || "Loading";
+
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      
+      timeoutRef.current = setTimeout(() => hideOverlay(), 5000);
+      gsap.set(overlayEl, { autoAlpha: 1 });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        textEl.className = "text-accent-base scramble-brand";
+        textEl.innerText = label;
+        return;
+      }
+
+      let lengthWithoutSpaces = label.replace(/\s/g, "").length;
+      textEl.className = "text-accent-base";
+      textEl.innerText = label.replace(/[^\s]/g, " ");
+
+      let tl = gsap.timeline();
+      tl.to(textEl, {
+        duration: 0.8,
+        scrambleText: {
+          text: (function(text) {
+            let result = "";
+            for (let char of text) {
+              result += char === " " ? " " : defaultChars[Math.floor(Math.random() * defaultChars.length)];
+            }
+            return result;
+          })(label),
+          chars: defaultChars,
+          speed: 1,
+          revealDelay: 0.1,
+          oldClass: "scramble-white",
+          newClass: "scramble-white"
+        },
+        ease: "none"
+      }, 0);
+
+      tl.to(textEl, {
+        duration: 0.8,
+        scrambleText: {
+          text: label,
+          chars: defaultChars,
+          speed: 1,
+          revealDelay: 0.1,
+          oldClass: "scramble-white",
+          newClass: "scramble-brand"
+        },
+        ease: "none"
+      }, lengthWithoutSpaces > 0 ? 0.8 / lengthWithoutSpaces : 0);
+
+      timelineRef.current = tl;
+    };
+
+    let handleReveal = () => hideOverlay();
+
+    window.addEventListener("seedtransition:cover", handleCover);
+    window.addEventListener("seedtransition:reveal", handleReveal);
+
+    return () => {
+      window.removeEventListener("seedtransition:cover", handleCover);
+      window.removeEventListener("seedtransition:reveal", handleReveal);
+      if (timelineRef.current) timelineRef.current.kill();
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [hideOverlay]);
+
+  return (
+    <div id="transition-overlay" aria-hidden="true" className="pointer-events-none fixed inset-0 z-[310] overflow-hidden">
+      <div className={`ts-brand ${baseClassName} bg-brand`} style={defaultStyle} />
+      <div className={`ts-dark ${baseClassName} bg-[#141314]`} style={defaultStyle} />
+      <div ref={overlayRef} className="absolute inset-0 z-[2] grid place-items-center" style={{ opacity: 0 }}>
+        <span ref={textRef} className="text-accent-base text-brand">Loading</span>
+      </div>
+    </div>
+  );
+}
+
+gsap.registerPlugin(ScrambleTextPlugin);
+
+const scrollToTop = () => {
+  if (window.lenis) {
+    window.lenis.scrollTo(0, { immediate: true });
+  } else {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+};
+
+const detectLayoutType = (pathname) => {
+  let layout = getLayoutType(pathname);
+  return layout !== "app" 
+    ? layout 
+    : (typeof document !== "undefined" && document.querySelector("[data-anon-app-shell]") ? "marketing" : layout);
+};
+
+const getBaseSegment = (pathname) => {
+  return (pathname && typeof pathname === "string" && pathname.split("?")[0].split("#")[0].split("/").filter(Boolean)[0]) || "";
+};
+
+const isSameSection = (pathA, pathB) => {
+  let baseA = getBaseSegment(pathA);
+  let baseB = getBaseSegment(pathB);
+  return baseA !== "" && baseA === baseB;
+};
+
+export default function TransitionLayout({ children }) {
+  let pathname = usePathname();
+  let { triggerPageEnter, revealPage, onGatesClear } = useAnimation();
+  
+  let layoutTypeRef = useRef(null);
+  let currentPathRef = useRef(pathname);
+  let isInterceptedRef = useRef(false);
+  let transitionConfigRef = useRef(null);
+  let leaveTargetsRef = useRef([]);
+
+  useEffect(() => {
+    layoutTypeRef.current = detectLayoutType(pathname);
+  }, [pathname]);
+
+  let leaveFnRef = useRef(null);
+  let enterFnRef = useRef(null);
+
+  useEffect(() => {
+    if (!("navigation" in window)) {
+      let handlePopState = () => {
+        let currentPath = window.location.pathname;
+        if (currentPath !== currentPathRef.current) {
+          currentPathRef.current = currentPath;
+          if (enterFnRef.current) enterFnRef.current();
+        }
+      };
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
+
+    let handleNavigate = (e) => {
+      if (e.navigationType !== "traverse") return;
+      if (e.hashChange) return;
+
+      let destinationUrl = new URL(e.destination.url);
+      let currentPath = window.location.pathname;
+
+      if (destinationUrl.pathname === currentPath) {
+        // Skip same pathname
+      } else if (e.canIntercept && leaveFnRef.current) {
+        isInterceptedRef.current = true;
+        setTransitionTarget(destinationUrl.pathname);
+        
+        e.intercept({
+          handler: async () => {
+            await leaveFnRef.current();
+          }
+        });
+      }
+    };
+
+    let handleNavigateSuccess = () => {
+      if (isInterceptedRef.current && enterFnRef.current) {
+        isInterceptedRef.current = false;
+        enterFnRef.current();
+      }
+    };
+
+    window.navigation.addEventListener("navigate", handleNavigate);
+    window.navigation.addEventListener("navigatesuccess", handleNavigateSuccess);
+
+    return () => {
+      window.navigation.removeEventListener("navigate", handleNavigate);
+      window.navigation.removeEventListener("navigatesuccess", handleNavigateSuccess);
+    };
+  }, []);
+
+  let leave = useCallback(async () => {
+    let currentLayout = layoutTypeRef.current;
+    let targetPath = getTransitionTarget();
+    let targetLayout = targetPath ? detectLayoutType(targetPath) : currentLayout;
+    let currentPath = window.location.pathname;
+
+    let config = (currentLayout === targetLayout)
+      ? getTransitionConfig(currentLayout)
+      : (currentLayout === "marketing" || targetLayout === "marketing")
+        ? getTransitionConfig("marketing")
+        : getTransitionConfig(currentLayout);
+
+    if (config && isSameSection(currentPath, targetPath)) {
+      config = getTransitionConfig("sectionFade");
+    }
+    
+    transitionConfigRef.current = config;
+
+    if (!config) return Promise.resolve();
+
+    if (config.mechanism === "panel") {
+      let brandOverlay = document.querySelector("#transition-overlay .ts-brand");
+      let darkOverlay = document.querySelector("#transition-overlay .ts-dark");
+
+      if (!brandOverlay || !darkOverlay) {
+        scrollToTop();
+        return Promise.resolve();
+      }
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set("#transition-overlay", { pointerEvents: "auto" });
+        gsap.set([brandOverlay, darkOverlay], { clipPath: CLIP_REVEALED });
+        scrollToTop();
+        return Promise.resolve();
+      }
+
+      let { duration, ease } = config.cover;
+
+      return new Promise((resolve) => {
+        gsap.set("#transition-overlay", { pointerEvents: "auto" });
+        window.dispatchEvent(new CustomEvent("seedtransition:cover", { detail: { label: getTransitionLabel() } }));
+
+        (function (timeline, { brand, dark, duration = 0.6, ease = "expo.inOut" } = {}) {
+          timeline.fromTo(brand, { clipPath: CLIP_HIDDEN }, { clipPath: CLIP_REVEALED, duration, ease }, 0);
+          timeline.fromTo(dark, { clipPath: CLIP_HIDDEN }, { clipPath: CLIP_REVEALED, duration, ease }, 0.08);
+        })(
+          gsap.timeline({
+            onComplete: () => {
+              scrollToTop();
+              resolve();
+            }
+          }),
+          { brand: brandOverlay, dark: darkOverlay, duration, ease }
+        );
+      });
+    }
+
+    let contentElements = document.querySelectorAll("[data-transition-content]");
+    let footerElement = document.querySelector("footer");
+
+    if (contentElements.length === 0) {
+      scrollToTop();
+      return;
+    }
+
+    let { duration, ease } = config.leave;
+    let targets = Array.from(contentElements);
+    if (footerElement) targets.push(footerElement);
+    
+    leaveTargetsRef.current = targets;
+
+    return new Promise((resolve) => {
+      let tl = gsap.timeline({
+        onComplete: () => {
+          scrollToTop();
+          resolve();
+        }
+      });
+      tl.to(contentElements, { opacity: 0, duration, ease }, 0);
+      if (footerElement) {
+        tl.to(footerElement, { opacity: 0, duration, ease }, 0);
+      }
+    });
+  }, []);
+
+  let enter = useCallback(async () => {
+    let config = transitionConfigRef.current || getTransitionConfig(detectLayoutType(pathname));
+
+    if (!config) return Promise.resolve();
+
+    let triggerEnter = () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          triggerPageEnter();
+        });
+      });
+    };
+
+    if (config.mechanism === "panel") {
+      let brandOverlay = document.querySelector("#transition-overlay .ts-brand");
+      let darkOverlay = document.querySelector("#transition-overlay .ts-dark");
+
+      if (!brandOverlay || !darkOverlay) {
+        triggerEnter();
+        return Promise.resolve();
+      }
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        triggerEnter();
+        gsap.set([brandOverlay, darkOverlay], { clipPath: CLIP_HIDDEN });
+        gsap.set("#transition-overlay", { pointerEvents: "none" });
+        return Promise.resolve();
+      }
+
+      let { duration, ease } = config.reveal;
+
+      return new Promise((resolve) => {
+        let hasMostlyRevealed = false;
+        let gatesClearFn = null;
+        let timeoutId = null;
+
+        let handleMostlyRevealed = () => {
+          if (!hasMostlyRevealed) {
+            hasMostlyRevealed = true;
+            if (timeoutId) clearTimeout(timeoutId);
+            if (gatesClearFn) gatesClearFn();
+            
+            window.dispatchEvent(new CustomEvent("seedtransition:reveal"));
+
+            (function (timeline, { brand, dark, duration = 0.8, ease = "expo.inOut", lag = 0.16, onMostlyRevealed } = {}) {
+              let proxy = { pd: 0, pb: 0 };
+              
+              if (dark) dark.style.clipPath = getClipPathCurve(0);
+              if (brand) brand.style.clipPath = getClipPathCurve(0);
+
+              timeline.to(proxy, {
+                pd: 1,
+                duration,
+                ease,
+                onUpdate: () => { if (dark) dark.style.clipPath = getClipPathCurve(proxy.pd); }
+              }, 0);
+              
+              timeline.to(proxy, {
+                pb: 1,
+                duration,
+                ease,
+                onUpdate: () => { if (brand) brand.style.clipPath = getClipPathCurve(proxy.pb); }
+              }, lag);
+              
+              if (onMostlyRevealed) timeline.call(onMostlyRevealed, [], lag + 0.8 * duration);
+              
+            })(
+              gsap.timeline({
+                onComplete: () => {
+                  revealPage();
+                  gsap.set([brandOverlay, darkOverlay], { clipPath: CLIP_HIDDEN });
+                  gsap.set("#transition-overlay", { pointerEvents: "none" });
+                  resolve();
+                }
+              }),
+              { brand: brandOverlay, dark: darkOverlay, duration, ease, onMostlyRevealed: revealPage }
+            );
+          }
+        };
+
+        timeoutId = setTimeout(handleMostlyRevealed, 4000);
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            gatesClearFn = onGatesClear(handleMostlyRevealed);
+          });
+        });
+      });
+    }
+
+    let { duration, ease } = config.enter;
+    let contentElements = document.querySelectorAll("[data-transition-content]");
+    let footerElement = document.querySelector("footer");
+
+    let currentElementsSet = new Set(contentElements);
+    let unmountedTargets = leaveTargetsRef.current.filter(el => el && !currentElementsSet.has(el));
+    
+    if (unmountedTargets.length) {
+      gsap.set(unmountedTargets, { opacity: 1 });
+    }
+    
+    leaveTargetsRef.current = [];
+
+    if (contentElements.length === 0) {
+      triggerEnter();
+      return;
+    }
+
+    let tl = gsap.timeline();
+    return new Promise((resolve) => {
+      tl.fromTo(contentElements, { opacity: 0 }, { opacity: 1, duration, ease }, 0);
+      if (footerElement) {
+        tl.fromTo(footerElement, { opacity: 0 }, { opacity: 1, duration, ease }, 0);
+      }
+      tl.call(triggerEnter, [], 0);
+      tl.call(() => resolve(), [], ">");
+    });
+  }, [pathname, triggerPageEnter, revealPage, onGatesClear]);
+
+  useEffect(() => {
+    leaveFnRef.current = leave;
+    enterFnRef.current = enter;
+  }, [leave, enter]);
+
+  return (
+    <RouterTransition leave={leave} enter={enter}>
+      <TransitionRouterProvider>
+        {children}
+        <TransitionOverlay />
+      </TransitionRouterProvider>
+    </RouterTransition>
+  );
+}
+
