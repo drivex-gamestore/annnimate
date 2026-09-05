@@ -8,6 +8,8 @@ import CookieConsentProvider from '@providers/CookieConsentProvider'
 import { UserProvider } from '@providers/UserProvider'
 import { ScrollLockProvider } from '@providers/ScrollLockProvider'
 import AppProvidersExtras from '@providers/AppProviders'
+import { NotificationProvider } from '@providers/NotificationProvider'
+import { ThemeProvider } from '@providers/ThemeProvider'
 
 const noop = async () => {};
 
@@ -21,7 +23,11 @@ export default function AppProviders({ children }) {
               <AnimationProvider>
                 <CategoryProvider>
                   <AppProvidersExtras>
+                  <NotificationProvider>
+                  <ThemeProvider>
                     {children}
+                    </ThemeProvider>
+                    </NotificationProvider>
                   </AppProvidersExtras>
                   <CookieConsentProvider />
                 </CategoryProvider>

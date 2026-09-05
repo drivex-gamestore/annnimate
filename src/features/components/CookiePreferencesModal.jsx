@@ -1,60 +1,83 @@
-L
-import { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
+
+// NOTE: original module id: 522016
 import Link from 'next/link';
-import CloseIcon from '../components/icons/CloseIcon'; 
+
+// NOTE: original module id: 137410
+import CloseIcon from '@/components/icons/CloseIcon';
+
+// NOTE: original module id: 609104
 import {
   Dialog,
   DialogContent,
   DialogClose,
   DialogTitle,
-  DialogDescription
-} from '../components/ui/Dialog'; 
+  DialogDescription,
+} from '@/components/ui/Dialog';
 
-import Button from '../components/ui/Button'; 
-import Switch from '../components/ui/Switch'; 
+// NOTE: original module id: 687989
+import Button from '@/components/ui/Button';
+
+// NOTE: original module id: 870777
+import Toggle from '@/components/ui/Toggle';
+
+// NOTE: original module id: 160725
 import {
   getConsent,
+  defaultConsent,
   setConsent,
   dispatchConsentChanged,
-  defaultConsent
-} from './consent';
+} from '@/utils/consent';
 
-const CATEGORIES = [
+// ── IDENTIFIER MAPPINGS ──────────────────────────────────────────────
+// c -> cookieCategories
+// u -> CookiePreferencesModal
+// e (prop) -> open
+// d (prop) -> onOpenChange
+// p -> consentState
+// f -> setConsentState
+// m -> handleSave
+// t, r (in onChange) -> checked, categoryId
+// ─────────────────────────────────────────────────────────────────────
+
+const cookieCategories = [
   {
-    id: 'essential',
-    name: 'Essential',
-    description: 'Authentication, payments, and your own preferences. Always on.',
-    cookies: 'Supabase Auth · Stripe · annnimate_consent',
-    required: true
+    id: "essential",
+    name: "Essential",
+    description: "Authentication, payments, and your own preferences. Always on.",
+    cookies: "Supabase Auth · Stripe · annnimate_consent",
+    required: true,
   },
   {
-    id: 'analytics',
-    name: 'Analytics',
-    description:
-      'Off: anonymous pageviews only (no cookies, no recording). On: persistent visitor ID, session recording with inputs masked, click and form capture.',
-    cookies: 'PostHog (EU)',
-    required: false
+    id: "analytics",
+    name: "Analytics",
+    description: "Off: anonymous pageviews only (no cookies, no recording). On: persistent visitor ID, session recording with inputs masked, click and form capture.",
+    cookies: "PostHog (EU)",
+    required: false,
   },
   {
-    id: 'functional',
-    name: 'Functional',
-    description: 'Live chat support so you can ask a question without leaving the page.',
-    cookies: 'Crisp',
-    required: false
-  }
+    id: "functional",
+    name: "Functional",
+    description: "Live chat support so you can ask a question without leaving the page.",
+    cookies: "Crisp",
+    required: false,
+  },
 ];
 
 export default function CookiePreferencesModal({ open, onOpenChange }) {
-  const [preferences, setPreferences] = useState(() => getConsent() || defaultConsent);
+  const [consentState, setConsentState] = useState(
+    () => getConsent() || defaultConsent
+  );
 
   useEffect(() => {
     if (open) {
-      setPreferences(getConsent() || defaultConsent);
+      setConsentState(getConsent() || defaultConsent);
     }
   }, [open]);
 
-  const handleSave = (updatedPreferences) => {
-    setConsent({ ...updatedPreferences, essential: true, method: 'explicit' });
+  const handleSave = (newConsent) => {
+    setConsent({ ...newConsent, essential: true, method: "explicit" });
     dispatchConsentChanged();
     onOpenChange(false);
   };
@@ -78,35 +101,47 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
             What you let us store.
           </DialogTitle>
           <DialogDescription className="text-body text-foreground-muted">
-            Nothing non-essential is stored on your device until you toggle it on here. Read the{' '}
+            Nothing non-essential is stored on your device until you toggle it on here. Read the{" "}
             <Link
               href="/cookies"
               className="underline decoration-foreground/30 underline-offset-4 transition-colors duration-(--duration-quick) ease-(--ease-expo-out) hover:decoration-foreground hover:text-foreground"
             >
               cookie policy
-            </Link>{' '}
+            </Link>{" "}
             for the full breakdown.
           </DialogDescription>
         </div>
 
         <ul className="mt-24 flex flex-col divide-y divide-foreground/10 border-y border-foreground/10">
-          {CATEGORIES.map((category) => (
+          {cookieCategories.map((category) => (
             <li key={category.id} className="flex items-start gap-24 py-20">
               <div className="flex flex-1 flex-col gap-6">
                 <div className="flex items-baseline gap-12">
-                  <span className="text-accent-xs text-foreground">{category.name}</span>
+                  <span className="text-accent-xs text-foreground">
+                    {category.name}
+                  </span>
                   {category.required && (
-                    <span className="text-accent-xs text-foreground/45">Required</span>
+                    <span className="text-accent-xs text-foreground/45">
+                      Required
+                    </span>
                   )}
                 </div>
-                <p className="text-body-sm text-foreground-muted">{category.description}</p>
-                <p className="text-accent-xs text-foreground/45">{category.cookies}</p>
+                <p className="text-body-sm text-foreground-muted">
+                  {category.description}
+                </p>
+                <p className="text-accent-xs text-foreground/45">
+                  {category.cookies}
+                </p>
               </div>
-              <Switch
-                checked={!!preferences[category.id]}
+              <Toggle
+                checked={!!consentState[category.id]}
                 disabled={category.required}
                 onChange={(checked) => {
-                  setPreferences((prev) => ({ ...prev, [category.id]: checked }));
+                  const categoryId = category.id;
+                  setConsentState((prevState) => ({
+                    ...prevState,
+                    [categoryId]: checked,
+                  }));
                 }}
                 label={`Toggle ${category.name}`}
               />
@@ -125,7 +160,7 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
                   essential: true,
                   analytics: true,
                   functional: true,
-                  marketing: false
+                  marketing: false,
                 })
               }
               className="flex-1"
@@ -141,7 +176,7 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
                   essential: true,
                   analytics: false,
                   functional: false,
-                  marketing: false
+                  marketing: false,
                 })
               }
               className="flex-1"
@@ -153,7 +188,7 @@ export default function CookiePreferencesModal({ open, onOpenChange }) {
             type="button"
             theme="brand"
             size="xs"
-            onClick={() => handleSave(preferences)}
+            onClick={() => handleSave(consentState)}
             className="w-full"
           >
             Save preferences
