@@ -11,12 +11,12 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@app/*": ["./app/*"],
+      "@app/*": ["./src/app/*"],
       "@providers/*": ["./src/lib/providers/*"],
       "@features/*": ["./src/features/*"],
-      "@config/*": ["./src/config/*"],
+      "@config/*": ["./src/shared/config/*"],
       "@lib/*": ["./src/lib/*"],
-      "@hooks/*": ["./src/lib/hooks/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@components/*": ["./src/features/components/*"],
       "@animations/*": ["./src/features/animations/*"],
       "@shared/*": ["./src/shared/*"]

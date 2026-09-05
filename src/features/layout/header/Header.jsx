@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import Link from 'next/link';
 import { cn } from '@lib/vendor';
-import { t } from '@features/helpers/translate'; 
+import { t } from '@components/helpers/translate'; 
 import { isRouteActive } from '@config/isRouteActive'; 
 import { bunnyImageUrl } from '@config/bunnyImageUrl'; 
 import { useCategories } from '@lib/providers/CategoryProvider'; 
@@ -15,7 +15,7 @@ import { DesktopNavItem } from '@features/layout/header/DesktopNavItem';
 import { MobileNavItem } from '@features/layout/header/MobileNavItem';
 import { HeaderMarquee } from '@features/layout/header/HeaderMarquee';
 import { NAV_ITEMS } from '@config/headerNavConfig';
-import Logo from '@components/ui/Logo'; 
+import HeaderLogo from '@components/ui/HeaderLogo'; 
 import NavLink from '@components/NavLink'; 
 import AnimatedButton from '@animations/components/AnimatedButton'; 
 
@@ -355,7 +355,7 @@ export default function Header({ latestAnimation }) {
               isSurfaceBackground ? "bg-surface" : "bg-transparent"
             )}
           >
-            <Logo className="lg:col-span-3" />
+            <HeaderLog className="lg:col-span-3" />
             
             <nav
               ref={navRef}

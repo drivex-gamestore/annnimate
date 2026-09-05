@@ -30,7 +30,7 @@ export function NewsletterEyebrow({
       <span>{secondary}</span>
     </div>
   );
-}[span_3](start_span)[span_3](end_span)
+}
 
 export default function NewsletterForm({
   source = "footer",
@@ -64,7 +64,7 @@ export default function NewsletterForm({
   const getAnalyticsData = () => ({
     source: source || "unknown",
     page_url: window.location.href
-  });[span_4](start_span)[span_4](end_span)
+  });
 
   useEffect(() => {
     const el = formRef.current;
@@ -82,8 +82,8 @@ export default function NewsletterForm({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [source]);[span_5](start_span)[span_5](end_span)
-
+  }, [source]);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting || isSuccess) return;
@@ -109,7 +109,7 @@ export default function NewsletterForm({
       if (validationErrors.email) emailInputRef.current?.focus();
       else if (validationErrors.policy) policyCheckboxRef.current?.focus();
       return;
-    }[span_6](start_span)[span_6](end_span)
+    }
 
     setErrors({});
     setIsSubmitting(true);
@@ -147,7 +147,7 @@ export default function NewsletterForm({
     } finally {
       setIsSubmitting(false);
     }
-  };[span_7](start_span)[span_7](end_span)
+  };
 
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
@@ -172,14 +172,14 @@ export default function NewsletterForm({
       setIsSavingProfile(false);
       setIsProfileDone(true);
     }
-  };[span_9](start_span)[span_9](end_span)
+  };
 
   const handleSkipProfile = () => {
     if (!isSavingProfile) {
       analytics.track("newsletter_profile_skipped", getAnalyticsData());
       setIsProfileDone(true);
     }
-  };[span_10](start_span)[span_10](end_span)
+  };
 
   const prefix = idPrefix || source;
   const firstNameId = `${prefix}-newsletter-firstname`;

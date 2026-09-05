@@ -6,7 +6,7 @@ import LogoIcon from '@components/LogoIcon';
 import LogoText from '@features/utilities/LogoText'; 
 import { cn } from '@lib/vendor'; 
 import { useTransitionClick } from '@hooks/useTransitionClick'; 
-import { t } from '@features/helpers/translate'; 
+import { t } from '@components/helpers/translate'; 
 
 export default function HeaderLogo({ className }) {
   const handleTransitionClick = useTransitionClick('/');

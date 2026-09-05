@@ -1,4 +1,4 @@
-import { t } from '@features/helpers/translate'; 
+import { t } from '@components/helpers/translate'; 
 
 export const THEMES = ["light", "dark", "brand"];
 

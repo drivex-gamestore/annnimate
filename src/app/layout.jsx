@@ -1,19 +1,19 @@
 import AppProviders from './providers';
-import '../src/styles/style.css';
-import AppLayout from '../src/features/applayout';
+import '../styles/style.css';
+import AppLayout from '../features/applayout';
 import Script from 'next/script';
 import LocalFont from 'next/font/local';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { getLatestAnimation } from '@lib/queries/getLatestAnimation';
 
 const geistSans = LocalFont({
-  src: '../public/fonts/Geist-Variable.woff2',
+  src: '../../public/fonts/Geist-Variable.woff2',
   variable: '--font-geist-sans',
   weight: '100 900',
 });
 
 const geistMono = LocalFont({
-  src: '../public/fonts/GeistMono-Variable.woff2',
+  src: '../../public/fonts/GeistMono-Variable.woff2',
   variable: '--font-geist-mono',
   weight: '100 900',
   preload: false,
@@ -23,37 +23,37 @@ const geistMono = LocalFont({
 const aktivGrotesk = LocalFont({
   src: [
     {
-      path: '../public/fonts/AktivGroteskCorp-Light.woff2',
+      path: '../../public/fonts/AktivGroteskCorp-Light.woff2',
       weight: '300',
       style: 'normal',
     },
     {
-      path: '../public/fonts/AktivGroteskCorp-Regular.woff2',
+      path: '../../public/fonts/AktivGroteskCorp-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../public/fonts/AktivGroteskCorp-Italic.woff2',
+      path: '../../public/fonts/AktivGroteskCorp-Italic.woff2',
       weight: '400',
       style: 'italic',
     },
     {
-      path: '../public/fonts/AktivGroteskCorp-Medium.woff2',
+      path: '../../public/fonts/AktivGroteskCorp-Medium.woff2',
       weight: '500',
       style: 'normal',
     },
     {
-      path: '../public/fonts/AktivGroteskCorp-MediumItalic.woff2',
+      path: '../../public/fonts/AktivGroteskCorp-MediumItalic.woff2',
       weight: '500',
       style: 'italic',
     },
     {
-      path: '../public/fonts/AktivGroteskCorp-Bold.woff2',
+      path: '../../public/fonts/AktivGroteskCorp-Bold.woff2',
       weight: '700',
       style: 'normal',
     },
     {
-      path: '../public/fonts/AktivGroteskCorp-BoldItalic.woff2',
+      path: '../../public/fonts/AktivGroteskCorp-BoldItalic.woff2',
       weight: '700',
       style: 'italic',
     },
@@ -63,7 +63,7 @@ const aktivGrotesk = LocalFont({
 
 
 const shadowsIntoLight = LocalFont({
-  src: '../public/fonts/ShadowsIntoLight_Regular.woff2',
+  src: '../../public/fonts/ShadowsIntoLight_Regular.woff2',
   variable: '--font-handwritten',
   weight: '400',
 });
