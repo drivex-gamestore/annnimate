@@ -355,7 +355,7 @@ export default function Header({ latestAnimation }) {
               isSurfaceBackground ? "bg-surface" : "bg-transparent"
             )}
           >
-            <HeaderLog className="lg:col-span-3" />
+            <HeaderLogo className="lg:col-span-3" />
             
             <nav
               ref={navRef}
