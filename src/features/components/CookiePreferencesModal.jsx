@@ -8,10 +8,10 @@ import {
   DialogClose,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/Dialog';
+} from '@components/ui/Dialog';
 
-import AnimatedButton from '@animations/components/AnimatedAnimatedButton';
-import Toggle from '@/components/ui/Toggle';
+import AnimatedButton from '@animations/components/AnimatedButton';
+import Toggle from '@components/ui/Toggle';
 
 import {
   getConsent,

@@ -7,7 +7,7 @@ import { IconContext } from "@phosphor-icons/react";
 import { Tooltip } from "react-tooltip";
 import { useUser } from "@providers/UserProvider";
 import { captureFirstTouch, collectAttribution } from '@lib/auth/attribution'; 
-import { usePageEnterAnimation } from '@/hooks/usePageEnterAnimation'; 
+import { usePageEnterAnimation } from '@hooks/usePageEnterAnimation'; 
 import { cn } from '@lib/vendor'; 
 
 const AppToaster = ({ ...props }) => (
