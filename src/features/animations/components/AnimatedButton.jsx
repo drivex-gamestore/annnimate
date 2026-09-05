@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cn } from '@lib/vendor';
-import { useTransitionClick } from "@shared/hooks/useTransitionClick";
+import { useTransitionClick } from "@hooks/useTransitionClick";
 import { InlineLoader } from "@animations/components/Loader"; 
 
 const SIZES = {

@@ -1,22 +1,24 @@
 "use client";
 
 import LenisProvider from '@providers/LenisProvider'
-import TransitionRouterContext from '@providers/TransitionRouterProvider'
+import TransitionRouterContext, { RouterTransition } from '@providers/TransitionRouterProvider'
 import AnimationProvider from '@providers/AnimationProvider'
 import CategoryProvider from '@providers/CategoryProvider'
+
+const noop = async () => {};
 
 export default function AppProviders({ children }) {
   return (
     <LenisProvider>
-      <TransitionRouterContext>
-        <AnimationProvider>
-          <CategoryProvider>
-             <LazyAnalytics>
+      <RouterTransition leave={noop} enter={noop}>
+        <TransitionRouterContext>
+          <AnimationProvider>
+            <CategoryProvider>
               {children}
-            </LazyAnalytics>
-          </CategoryProvider>
-        </AnimationProvider>
-      </TransitionRouterContext>
+            </CategoryProvider>
+          </AnimationProvider>
+        </TransitionRouterContext>
+      </RouterTransition>
     </LenisProvider>
   );
 }

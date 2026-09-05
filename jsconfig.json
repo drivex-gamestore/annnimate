@@ -17,9 +17,9 @@
       "@config/*": ["./src/config/*"],
       "@lib/*": ["./src/lib/*"],
       "@hooks/*": ["./src/lib/hooks/*"],
-      "@shared/*": ["./src/shared/*"],
       "@components/*": ["./src/features/components/*"],
-      "@animations/*": ["./src/features/animations/*"]
+      "@animations/*": ["./src/features/animations/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": [

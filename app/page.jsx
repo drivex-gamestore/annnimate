@@ -1,12 +1,7 @@
-import AppProviders from './providers'
-import RootLayout from './layout'
-
-export default function annnimatePage({ children }) {
+export default function Page() {
   return (
-    <html lang="en">
-      <body>
-        <main>{children}</main>
-      </body>
-    </html>
-  )
+    <main>
+      {/* Page content — ဒီနေရာမှာ အကို့ရဲ့ home page content ကို ဆက်ရေးပါ */}
+    </main>
+  );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { THEMES } from '@features/layout/header/shared/headerNavConfig';
+import { THEMES } from '@config/headerNavConfig';
 
 export function useHeaderState(headerRef) {
   const pathname = usePathname();

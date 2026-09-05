@@ -1,3 +1,5 @@
+"use client";
+
 import { Fragment, useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
@@ -433,7 +435,7 @@ export default function Header({ latestAnimation }) {
                   isMobileMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "top-[calc(50%+4px)]"
                 )}
               />
-            </AnimatedButton
+            </AnimatedButton>
           </div>
         </div>
         
