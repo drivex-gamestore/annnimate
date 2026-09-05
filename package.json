@@ -38,6 +38,7 @@
     "tailwind-merge": "^3.3.1",
     "ldrs": "^1.1.7",
     "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.43.4",
     "@phosphor-icons/react": "^2.1.10",
     "react-tooltip": "^5.29.1",
     "sonner": "^1.7.4",

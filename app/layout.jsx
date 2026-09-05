@@ -4,6 +4,7 @@ import AppLayout from '../src/features/applayout';
 import Script from 'next/script';
 import LocalFont from 'next/font/local';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { getLatestAnimation } from '@lib/queries/getLatestAnimation';
 
 const geistSans = LocalFont({
   src: '../public/fonts/Geist-Variable.woff2',
@@ -109,7 +110,8 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const latestAnimation = await getLatestAnimation();
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -171,7 +173,7 @@ export default function RootLayout({ children }) {
       </head>
       <body data-transition-phase="idle">
         <AppProviders>
-          <AppLayout>
+          <AppLayout latestAnimation={latestAnimation}>
             {children}
             <SpeedInsights />
           </AppLayout>
