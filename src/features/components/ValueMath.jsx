@@ -9,7 +9,6 @@ import Checklist from '@features/components/ui/Checklist';
 import { useReveal } from '@hooks/useReveal';
 import storeConfig, { effectiveCyclePrice } from '@config/storeConfig';
 import { t } from '@features/helpers/translate';
-
 import HandIcon from '@features/utilities/HandIcon';
 import RobotIcon from '@features/utilities/RobotIcon';
 

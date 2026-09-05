@@ -5,17 +5,11 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { Toaster, toast } from "sonner";
 import { IconContext } from "@phosphor-icons/react";
 import { Tooltip } from "react-tooltip";
-
-// NOTE: original module id: 201220
-import { useUser } from "../hooks/useUser";
-// NOTE: original module id: 746374
+import { useUser } from "@providers/UserProvider";
 import { captureFirstTouch, collectAttribution } from '@lib/auth/attribution'; 
-// NOTE: original module id: 488463
-import { usePageEnterAnimation } from '@hooks/AnimationContext'; 
+import { usePageEnterAnimation } from '@/hooks/usePageEnterAnimation'; 
 import { cn } from '@lib/vendor'; 
 
-
-// NOTE: original module id: 830380 (Identifier: a)
 const AppToaster = ({ ...props }) => (
   <div data-theme="dark">
     <Toaster

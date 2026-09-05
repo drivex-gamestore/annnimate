@@ -47,8 +47,6 @@ function syncPostHogIdentity(distinctId, profile, user) {
   }
 }
 
-// ─── CONTEXT & PROVIDER ────────────────────────────────────────
-
 const UserContext = createContext({
   user: null,
   profile: null,
