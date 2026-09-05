@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import Link from 'next/link'; 
-import LogoIcon from '@components/LogoIcon'; 
+import LogoIcon from '@components/ui/LogoIcon'; 
 import LogoText from '@features/utilities/LogoText'; 
 import { cn } from '@lib/vendor'; 
 import { useTransitionClick } from '@hooks/useTransitionClick'; 
