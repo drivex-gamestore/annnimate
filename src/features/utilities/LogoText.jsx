@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-const SvgComponent = forwardRef(function SvgComponent(
+const LogoText = forwardRef(function LogoText(
   { width, height, className, ...restProps },
   ref
 ) {
@@ -55,4 +55,4 @@ const SvgComponent = forwardRef(function SvgComponent(
   );
 });
 
-export default SvgComponent;
+export default LogoText;
