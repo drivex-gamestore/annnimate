@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef, Fragment } from 'react';
-import { toast } from 'toast'; 
+import { toast } from 'sonner'; 
 import AnimatedButton from '@animations/components/AnimatedButton'; 
 import NavLink from '@components/NavLink';  
 import { analytics } from '@lib/analytics/analytics'; 

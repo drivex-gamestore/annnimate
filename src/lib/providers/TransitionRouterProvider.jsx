@@ -12,9 +12,6 @@ import {
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-
-
-
 const RouterTransitionContext = createContext(null);
 
 export function useRouterTransition() {

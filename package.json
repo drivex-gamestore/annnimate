@@ -51,8 +51,7 @@
     "sanity-plugin-mux-input": "^5.0.12",
     "styled-components": "^6.1.13",
     "posthog-js": "^1.409.0",
-    "lucide-react": "^1.41.0",
-    "toast": "^0.5.4"
+    "lucide-react": "^1.41.0"
   },
   "devDependencies": {
     "eslint": "^9.39.0",

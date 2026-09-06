@@ -1,8 +1,7 @@
 import { createBrowserClient } from "@supabase/ssr";
-const SUPABASE_URL = "https://awfklrxbaytuhycequvl.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3ZmtscnhiYXl0dWh5Y2VxdXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2NzA1MzIsImV4cCI6MjA3MjI0NjUzMn0.QpXstF5Nz_yXHHVzn9Har31AhW3oStooIezaq0cU6RQ";
 
+const SUPABASE_URL = "https://btqhhilvtlnfwqglbfki.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0cWhoaWx2dGxuZndxZ2xiZmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1OTY5NzcsImV4cCI6MjEwNDE3Mjk3N30.8VKIe6_5eUvrtnZ5RXfIwFSoC3qNuMTF4v7srowK_T4";
 
 export function createClient() {
   return createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
