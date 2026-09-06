@@ -8,7 +8,7 @@ import { Lock } from "@/components/icons";
 
 import { useBreakpoint } from "@hooks/useBreakpoint";
 
-import { analytics } from "@/lib/analytics";
+import { analytics } from "@lib/analytics/analytics";
 
 // NOTE: original module id: 42242
 import PaywallBlock from "@/components/paywall/PaywallBlock";

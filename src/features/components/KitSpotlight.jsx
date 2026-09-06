@@ -1,18 +1,17 @@
 "use client";
 
 import React from "react";
-import CheckoutButton from "@/components/checkout/CheckoutButton";
-import KitPrice from "@/components/pricing/KitPrice";
-import ShowreelVideo from "@/components/ui/ShowreelVideo";
-import { getKitPriceId } from "@/utils/pricingUtils";
-import { t } from "@/lib/i18n";
-
+import CheckoutButton from "@components/checkout/CheckoutButton";
+import KitPrice from "@components/checkout/KitPrice";
+import ShowreelVideo from "@components/sections/JustShipped";
+import { getKitPriceId } from "@config/siteConfig";
+import { t } from "@components/helpers/translate";
 
 export default function KitSpotlight({ className = "" }) {
   return (
     <div className={`grid grid-cols-1 gap-24 lg:grid-cols-3 ${className}`}>
       
-      {}
+      {/* Menu Kit Spotlight */}
       <div
         data-theme="dark"
         className="flex flex-col gap-24 bg-background p-24 text-foreground lg:col-span-2 lg:flex-row lg:items-center lg:p-32"
@@ -51,7 +50,7 @@ export default function KitSpotlight({ className = "" }) {
         </div>
       </div>
 
-      {}
+      {/* Reveal Kit Spotlight */}
       <div className="flex flex-col bg-surface p-24 lg:p-32">
         <div className="mb-12 flex flex-wrap items-center gap-12">
           <h3 className="text-h4 m-0 text-foreground">

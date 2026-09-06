@@ -1,21 +1,23 @@
 "use client";
 
 import React from "react";
-
-
 import AnimatedButton from '@animations/components/AnimatedButton'; 
 import NavLink from "@components/NavLink";
-
-import AnimatedNumber from "@/components/ui/AnimatedNumber";
-import FeatureList from "@/components/pricing/FeatureList";
+import RollerNumber from "@animations/components/RollerNumber";
+import { CheckList as FeatureList } from "@components/sections/FAQSection";
 import { PppLabel } from "@/components/pricing/PppLabel";
+import SiteConfig, { effectiveCyclePrice, effectiveCycleTotal } from "@config/siteConfig";
 
-import SiteConfig, { effectiveCyclePrice, effectiveCycleTotal } from "@/config/siteConfig";
-import { relativeShipped } from "@/utils/dateFormatter";
-import { isOfferActive } from "@/utils/offerUtils";
-import { getPppDisplayPrice, getPppEffectivePrice } from "@/utils/pppUtils";
-import { usePppTier } from "@/hooks/usePppTier";
-import { analytics } from "@/lib/analytics";
+import { relativeShipped } from "@components/sections/JustShipped";
+
+import { isOfferActive } from "@config/siteConfig";
+
+import { getPppDisplayPrice, getPppEffectivePrice } from "@components/checkout/KitPrice";
+
+import { usePppTier } from "@hooks/usePppGeo";
+
+import { analytics } from "@lib/analytics/analytics";
+
 import { t } from "@/lib/i18n";
 
 const THEME_CLASSES = {
@@ -163,7 +165,7 @@ export default function PricingCard({
         >
           <span className="text-h2 font-medium tracking-tight inline-flex items-baseline">
             <span>€</span>
-            <AnimatedNumber
+            <RollerNumber
               value={displayPrice}
               triggerMode="immediate"
               duration={rollerDuration}
