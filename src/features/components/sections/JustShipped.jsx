@@ -1,29 +1,10 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-
-
-
-
-
 import NavLink from "@components/NavLink";
 import AnimatedButton from "@components/ui/AnimatedButton";
 import { RevealHeadline } from "@/components/ui/RevealHeadline";
-
-
 import { SHOWREEL_SRC, SHOWREEL_POSTER } from "@/constants/media";
-
-
-
-
-
-
-
-
-
-
-
-
 
 export function relativeShipped(dateStr) {
   if (!dateStr) return null;
@@ -43,31 +24,13 @@ export function relativeShipped(dateStr) {
   return monthsDiff === 1 ? "1 month ago" : `${monthsDiff} months ago`;
 }
 
-
-
-
-
 const getTimestamp = (item) => new Date(item?.published_at || item?.created_at).getTime() || 0;
-
-
-
-
 
 export function byShipped(items = []) {
   return items
     .filter((item) => item.preview_image_url)
     .sort((itemA, itemB) => getTimestamp(itemB) - getTimestamp(itemA));
 }
-
-
-
-
-
-
-
-
-
-
 
 export function JustShipped({ items = [], count = 0 }) {
   const recentItems = byShipped(items).slice(0, 4);
@@ -126,19 +89,6 @@ export function JustShipped({ items = [], count = 0 }) {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default function ShowreelVideo({
   className = "",

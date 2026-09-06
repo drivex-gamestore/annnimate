@@ -4,16 +4,13 @@ import React, { forwardRef, useRef, useState, useEffect, useImperativeHandle, us
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import Link from 'next/link';
-
 import { XLogo, LinkedinLogo, InstagramLogo, GithubLogo } from '@components/shared'
-
 import LogoIcon from '@components/ui/LogoIcon'
 import LogoText from '@features/utilities/LogoText'
 import HomeLink from '@features/utilities/HimeLink'
 import NewsletterForm, { NewsletterEyebrow } from '@components/NewsletterEyebrow'
 import { useReveal } from '@hooks/useReveal';
 import { useCategories } from '@providers/CategoryProvider'
-
 import { t } from '@components/helpers/translate';
 import analytics from '@lib/analytics/analytics';
 import { isRouteActive } from '@config/isRouteActive';
