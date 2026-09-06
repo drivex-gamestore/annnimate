@@ -6,6 +6,7 @@ import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
 import { Flip } from "gsap/Flip";
 import { Draggable } from 'gsap/Draggable';
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { cx as classVarianceCx } from "class-variance-authority";
 import { extendTailwindMerge } from "tailwind-merge";
 
@@ -15,7 +16,8 @@ gsap.registerPlugin(
     SplitText, 
     Draggable,
     Flip,
-    InertiaPlugin
+    InertiaPlugin,
+    MotionPathPlugin
  );
 
 export { 
@@ -27,6 +29,7 @@ export {
     Draggable,
     Flip,
     InertiaPlugin
+    MotionPathPlugin
  };
 
 export const cx = classVarianceCx;

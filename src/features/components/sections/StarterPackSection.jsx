@@ -1,0 +1,48 @@
+import React from 'react';
+
+
+import { t } from '@utils/i18n';
+import AnimatedHeading from '@components/AnimatedHeading';
+import AnimatedText from '@components/AnimatedText';
+import LeadForm from '@components/LeadForm';
+
+
+export default function StarterPackSection({
+  source = "homepage",
+  idPrefix = "homepage",
+  theme = "light"
+}) {
+  return (
+    <section data-theme={theme} className="bg-background text-foreground">
+      <div className="v2-container py-96 lg:py-160">
+        <div className="mx-auto flex max-w-[640px] flex-col items-center gap-16 text-center">
+          <AnimatedHeading
+            as="h2"
+            sizeClass="text-h2"
+            trigger="scroll"
+            className="font-medium"
+          >
+            {t("common.starterPack.headline")}
+          </AnimatedHeading>
+          
+          <AnimatedText
+            triggerMode="scroll"
+            className="text-body max-w-[44ch] leading-relaxed text-foreground-muted"
+          >
+            {t("common.starterPack.body")}
+          </AnimatedText>
+          
+          <div className="mt-16 w-full max-w-[36rem] text-left">
+            <LeadForm
+              source={source}
+              idPrefix={idPrefix}
+              buttonLabel={t("common.starterPack.buttonLabel")}
+              inputSize="lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+

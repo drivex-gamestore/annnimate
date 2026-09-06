@@ -1,13 +1,13 @@
-import { useRef, useCallback, useEffect } from "react"; // e.i(271645)
-import gsap from "gsap"; // e.i(989970)
-import { ScrollTrigger } from "gsap/ScrollTrigger"; // e.i(883495)
-import { useGSAP } from "@gsap/react"; // e.i(365747)
-import { useAnimation } from "../hooks/useAnimation"; // e.i(488463) — SOURCE NOT PRESENT
-import { perfMeasure } from "../utils/perfMeasure"; // e.i(991763) — SOURCE NOT PRESENT
+import { useRef, useCallback, useEffect } from "react"; 
+import gsap from "gsap"; 
+import { ScrollTrigger } from "gsap/ScrollTrigger"; 
+import { useGSAP } from "@gsap/react"; 
+import { useAnimation } from "../hooks/useAnimation"; 
+import { perfMeasure } from "../utils/perfMeasure"; 
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Module-level flag so only one ScrollTrigger.refresh runs per frame
+
 let refreshScheduled = false;
 
 export function useReveal(
@@ -35,7 +35,7 @@ export function useReveal(
     }
   }, [ref]);
 
-  // Build the timeline whenever deps / mode / start change
+  
   useGSAP(
     () => {
       const el = ref.current;
@@ -44,7 +44,7 @@ export function useReveal(
       const tl = buildRef.current(el);
       timelineRef.current = tl;
 
-      // If we already decided to play (e.g. race with effect), restart now
+      
       if (hasPlayedRef.current) tl.restart(true);
 
       return () => {
@@ -58,7 +58,7 @@ export function useReveal(
     }
   );
 
-  // Schedule play based on mode
+  
   useEffect(() => {
     if (mode === "manual") return;
 
@@ -66,7 +66,7 @@ export function useReveal(
     let rafId = 0;
 
     const unsubscribe = whenRevealed(() => {
-      // Reduced motion → jump to end
+      
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         hasPlayedRef.current = true;
         if (timelineRef.current) timelineRef.current.progress(1);
@@ -88,7 +88,7 @@ export function useReveal(
             once: true,
             onEnter: play,
           });
-          // Coalesce refresh to one per frame
+          
           if (!refreshScheduled) {
             refreshScheduled = true;
             requestAnimationFrame(() => {

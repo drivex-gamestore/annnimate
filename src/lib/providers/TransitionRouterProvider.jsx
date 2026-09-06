@@ -12,9 +12,9 @@ import {
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-// ─────────────────────────────────────────────────────────────
-// Router Transition Context & Provider
-// ─────────────────────────────────────────────────────────────
+
+
+
 const RouterTransitionContext = createContext(null);
 
 export function useRouterTransition() {
@@ -66,7 +66,7 @@ export function RouterTransition({ children, leave, enter }) {
     },
     (navigationCallback, targetPath) => {
       if (stage) {
-        // Transition blocked - already in progress
+        
       } else {
         hasRunEnter.current = false;
         setStage("leaving");
@@ -87,9 +87,9 @@ export function RouterTransition({ children, leave, enter }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Transition Router Context & Provider
-// ─────────────────────────────────────────────────────────────
+
+
+
 const TransitionRouterContext = createContext(null);
 
 function getPathname(urlOrObj) {
@@ -164,6 +164,6 @@ export function useTransitionRouter() {
   return context;
 }
 
-// Next.js convention defaults
+
 export default TransitionRouterProvider;
 

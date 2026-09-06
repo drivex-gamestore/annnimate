@@ -28,7 +28,7 @@ function FlipIndicator({
     });
   }, []);
 
-  // Animates the pill from its current FLIP state to sit on `target`.
+  
   const animatePillTo = useCallback(
     (target) => {
       if (!pillRef.current || !target || !containerRef.current) return;

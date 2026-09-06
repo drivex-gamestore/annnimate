@@ -30,7 +30,7 @@ export default function Checklist({
 
         return (
           <li
-            // TODO: verify key stability (index used as key in original bundle)
+            
             key={index}
             className={`flex items-start ${selectedSize.gap} ${selectedSize.text} ${textColor} ${itemClassName} ${normalizedItem.className || ""}`}
           >

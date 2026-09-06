@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -7,7 +8,7 @@ import AnimatedButton from '@animations/components/AnimatedButton';
 import Tabs from '@components/ui/Tabs'; 
 import Checklist from '@features/components/ui/Checklist';
 import { useReveal } from '@hooks/useReveal';
-import storeConfig, { effectiveCyclePrice } from '@config/storeConfig';
+import siteConfig, { effectiveCyclePrice } from '@config/siteConfig';
 import { t } from '@components/helpers/translate';
 import HandIcon from '@features/utilities/HandIcon';
 import RobotIcon from '@features/utilities/RobotIcon';

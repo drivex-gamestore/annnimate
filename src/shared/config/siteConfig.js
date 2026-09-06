@@ -1,21 +1,20 @@
-const isForceProduction = process.env.NEXT_PUBLIC_FORCE_PRODUCTION === "true";
+const isForceProd = process.env.NEXT_PUBLIC_FORCE_PRODUCTION === "true";
+const forceTrueOverride = true;
+const isProduction = forceTrueOverride || isForceProd;
 
-const isDevEnv = true;
-const useTestPrices = isDevEnv || isForceProduction;
-
-const pricesProd = {
+const APP_PRICES_TEST = {
   pro: "price_1SmdgaRvKRKuKXmGKUEtcEIW",
   team: "price_1Sme0wRvKRKuKXmGxvFcJSSH",
   lifetimePro: "price_1So4YrRvKRKuKXmGGv53ZBWU"
 };
 
-const pricesTest = {
+const APP_PRICES_PROD = {
   pro: "price_1SgkfFRvKRKuKXmGBrzPYauv",
   team: "price_1SgkfDRvKRKuKXmGDhPp0Iex",
   lifetimePro: "price_1So4WaRvKRKuKXmGYkYZt35Z"
 };
 
-const landingPricesProd = {
+const LANDING_PRICES_TEST = {
   soloYearly: "price_1TdFEoRvKRKuKXmGEiYeo97J",
   soloMonthly: "price_1TdFEoRvKRKuKXmGV7jD9iQh",
   studioYearly: "price_1TdFEpRvKRKuKXmGRymGG43K",
@@ -24,7 +23,7 @@ const landingPricesProd = {
   studioPlusMonthly: "price_1TdFErRvKRKuKXmGxGTqkdgI"
 };
 
-const landingPricesTest = {
+const LANDING_PRICES_PROD = {
   soloYearly: "price_1TdFH5RvKRKuKXmGDXlyHBFY",
   soloMonthly: "price_1TdFH5RvKRKuKXmGV7QKmzVy",
   studioYearly: "price_1TdFH6RvKRKuKXmGo7qkBvqi",
@@ -33,7 +32,7 @@ const landingPricesTest = {
   studioPlusMonthly: "price_1TdFH8RvKRKuKXmGss4l59Cn"
 };
 
-const launchOfferProd = {
+const LAUNCH_OFFERS_TEST = {
   soloYearly: null,
   soloMonthly: null,
   studioYearly: null,
@@ -42,7 +41,7 @@ const launchOfferProd = {
   studioPlusMonthly: null
 };
 
-const launchOfferTest = {
+const LAUNCH_OFFERS_PROD = {
   soloYearly: "price_1TfRAbRvKRKuKXmGrVbCZJxA",
   soloMonthly: "price_1TfRKuRvKRKuKXmGFpW9zSaJ",
   studioYearly: "price_1TfRAcRvKRKuKXmG0pFVPJWM",
@@ -51,41 +50,37 @@ const launchOfferTest = {
   studioPlusMonthly: "price_1TfRKxRvKRKuKXmGR4qWpnDv"
 };
 
-export const prices = useTestPrices ? pricesTest : pricesProd;
-export const landingPrices = useTestPrices ? landingPricesTest : landingPricesProd;
-const launchOfferPrices = useTestPrices ? launchOfferTest : launchOfferProd;
+export const prices = isProduction ? APP_PRICES_PROD : APP_PRICES_TEST;
+export const landingPrices = isProduction ? LANDING_PRICES_PROD : LANDING_PRICES_TEST;
+const launchOffers = isProduction ? LAUNCH_OFFERS_PROD : LAUNCH_OFFERS_TEST;
 
-const quarterlyPricesProd = {
+const QUARTERLY_PRICES_TEST = {
   soloQuarterly: "price_1U1UGJRvKRKuKXmGM8VegBXN",
   studioQuarterly: "price_1U1UGKRvKRKuKXmGRpBeCyzG",
   studioPlusQuarterly: "price_1U1UGMRvKRKuKXmGBf0wcs7Y"
 };
 
-const quarterlyPricesTest = {
+const QUARTERLY_PRICES_PROD = {
   soloQuarterly: "price_1U1UHGRvKRKuKXmGFm3YYFT2",
   studioQuarterly: "price_1U1UHHRvKRKuKXmGQjtP5l3d",
   studioPlusQuarterly: "price_1U1UHJRvKRKuKXmG3vkO8i8k"
 };
 
-export const quarterlyPrices = useTestPrices ? quarterlyPricesTest : quarterlyPricesProd;
+export const quarterlyPrices = isProduction ? QUARTERLY_PRICES_PROD : QUARTERLY_PRICES_TEST;
 
-export function isOfferActive() {
-  return true;
-}
-
-const kitPricesProd = {
+const KIT_PRICES_TEST = {
   reveal: "price_1TlTU4RvKRKuKXmGzj8ym0l2",
   menu: "price_1U8HC9RvKRKuKXmGSeaIMCbI",
   "landing-pack": "price_1UBAN6RvKRKuKXmGsqHMpbEY"
 };
 
-const kitPricesTest = {
+const KIT_PRICES_PROD = {
   reveal: "price_1TlTXHRvKRKuKXmGl62rlPoa",
   menu: "price_1U8HFfRvKRKuKXmGVBlPxC8O",
   "landing-pack": "price_1UBANXRvKRKuKXmG8FC9WzzA"
 };
 
-const kitPrices = useTestPrices ? kitPricesTest : kitPricesProd;
+const kitPrices = isProduction ? KIT_PRICES_PROD : KIT_PRICES_TEST;
 
 
 (function({
@@ -98,44 +93,61 @@ const kitPrices = useTestPrices ? kitPricesTest : kitPricesProd;
   kitPricesProd = {},
   extra = []
 } = {}) {
-  let uniquePrices = new Set();
-  let addPrice = (priceId) => {
-    if (typeof priceId === "string" && priceId.startsWith("price_")) {
-      uniquePrices.add(priceId);
+  let validPrices = new Set();
+  let addPrice = (p) => {
+    if (typeof p === "string" && p.startsWith("price_")) {
+      validPrices.add(p);
     }
   };
-
   for (let group of [prices, landingPricesTest, landingPricesProd, launchOfferTest, launchOfferProd, kitPricesTest, kitPricesProd]) {
-    for (let priceId of Object.values(group || {})) {
-      addPrice(priceId);
+    for (let p of Object.values(group || {})) {
+      addPrice(p);
     }
   }
-
-  for (let priceId of extra) {
-    addPrice(priceId);
+  for (let p of extra) {
+    addPrice(p);
   }
 })({
   prices: {
-    ...pricesProd,
-    ...pricesTest
+    ...APP_PRICES_TEST,
+    ...APP_PRICES_PROD
   },
-
-  landingPricesTest: landingPricesProd,
-  landingPricesProd: landingPricesTest,
-  launchOfferTest: launchOfferProd,
-  launchOfferProd: launchOfferTest,
-  kitPricesTest: kitPricesProd,
-  kitPricesProd: kitPricesTest,
-  extra: [...Object.values(quarterlyPricesProd), ...Object.values(quarterlyPricesTest)]
+  landingPricesTest: LANDING_PRICES_TEST,
+  landingPricesProd: LANDING_PRICES_PROD,
+  launchOfferTest: LAUNCH_OFFERS_TEST,
+  launchOfferProd: LAUNCH_OFFERS_PROD,
+  kitPricesTest: KIT_PRICES_TEST,
+  kitPricesProd: KIT_PRICES_PROD,
+  extra: [...Object.values(QUARTERLY_PRICES_TEST), ...Object.values(QUARTERLY_PRICES_PROD)]
 });
 
 export const PACK_SLUGS = ["landing-pack"];
 
-export const getKitPriceId = (slug) => {
+export function getKitPriceId(slug) {
   return kitPrices[slug] || null;
-};
+}
 
-const storeConfig = {
+export function isOfferActive() {
+  return true;
+}
+
+export function effectiveCyclePrice(cycleObj) {
+  if (!cycleObj) return null;
+  if (isOfferActive()) return cycleObj.price;
+  return cycleObj.listPrice ?? cycleObj.price;
+}
+
+export function effectiveCycleTotal(cycleObj) {
+  if (!cycleObj?.cycleTotal) return null;
+  if (isOfferActive()) return cycleObj.cycleTotal;
+  return cycleObj.listCycleTotal ?? cycleObj.cycleTotal;
+}
+
+
+
+
+
+const siteConfig = {
   appName: "Annnimate",
   appDescription: "Production GSAP motion components for React and Vue. Every component shipped on a real brand site before it reached the library. By Good Fella.",
   domainName: "annnimate.com",
@@ -305,21 +317,4 @@ const storeConfig = {
   }
 };
 
-export const effectiveCyclePrice = (plan) => {
-  return plan
-    ? isOfferActive()
-      ? plan.price
-      : (plan.listPrice ?? plan.price)
-    : null;
-};
-
-export const effectiveCycleTotal = (plan) => {
-  return plan?.cycleTotal
-    ? isOfferActive()
-      ? plan.cycleTotal
-      : (plan.listCycleTotal ?? plan.cycleTotal)
-    : null;
-};
-
-export default storeConfig;
-
+export default SiteConfig;

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-// TODO: source not present in bundle
-import IconBase from '../components/IconBase'; // e.i(769464)
+
+import IconBase from '../components/IconBase'; 
 
 const weights = new Map([
   [
