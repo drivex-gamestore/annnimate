@@ -3,32 +3,26 @@
 import React, { useRef, useState, useEffect, Fragment } from "react";
 import { gsap, useGSAP } from "@lib/vendor";
 
-// NOTE: original module id: 499141
 import { Lock } from "@components/assets/icons";
 
 import { useBreakpoint } from "@hooks/useBreakpoint";
 
 import { analytics } from "@lib/analytics/analytics";
 
-// NOTE: original module id: 42242
-import PaywallBlock from "@/components/paywall/PaywallBlock";
+import NewsletterForm from "@/components/NewsletterForm";
 
-// NOTE: original module id: 928862
-import PaywallContainer from "@/components/paywall/PaywallContainer";
+import StarterPackBlock from "@components/ui/StarterPackBlock";
 
-// NOTE: original module id: 660219
-import { KIT_TOUCH_COOKIE, parseFirstTouch } from "@/utils/cookieUtils";
+import { KIT_TOUCH_COOKIE, parseFirstTouch } from "@shared/buildKitTouch";
 
-// NOTE: original module id: 687989
-import Button from "@/components/ui/Button";
+import AnimatedButton from "@animations/components/AnimatedButton";
 
-// NOTE: original module id: 520237
-import Link from "@/components/ui/Link";
+import NavLink from "@components/NavLink";
 
-// NOTE: original module id: 967791
-import { TESTIMONIALS } from "@/constants/testimonials";
+import { TESTIMONIALS } from "@components/sections/Testimonials";
 
 import SiteConfig, { effectiveCyclePrice } from "@config/siteConfig";
+
 
 
 const testimonial = TESTIMONIALS[2] || null;
@@ -189,22 +183,22 @@ export default function Paywall({
   
   const checkoutBlock = (
     <div className="flex flex-col items-center gap-12">
-      <Button href={checkoutUrl} onClick={handleCheckoutClick} theme="brand" size="sm">
+      <AnimatedButton href={checkoutUrl} onClick={handleCheckoutClick} theme="brand" size="sm">
         {unlockLabel}
-      </Button>
+      </AnimatedButton>
       <p className="text-accent-xs text-foreground-muted">
         Cancel anytime · 14-day money-back guarantee
       </p>
-      <Link href="/pricing" className="text-accent-xs text-foreground-muted hover:text-foreground">
+      <NavLink href="/pricing" className="text-accent-xs text-foreground-muted hover:text-foreground">
         See all plans
-      </Link>
+      </NavLink>
     </div>
   );
   
   if (isDesktopUnauth) {
     if (isSubscriber) {
       return (
-        <PaywallContainer
+        <StarterPackBlock
           title={animationName}
           isInStarterPack={isInStarterPack}
           checkoutBlock={showCheckout ? checkoutBlock : null}
@@ -241,11 +235,11 @@ export default function Paywall({
         {!isInStarterPack && <StarterPackThumbs items={starterPack} />}
         
         <div className="flex flex-col gap-8">
-          <PaywallBlock
+          <NewsletterForm
             source="paywall-block"
             idPrefix="paywall"
-            buttonLabel={isInStarterPack ? "Send me this component" : "Send me the free pack"}
-            buttonSize="sm"
+            AnimatedButtonLabel={isInStarterPack ? "Send me this component" : "Send me the free pack"}
+            AnimatedButtonSize="sm"
             className="w-full"
             compact={true}
             wantedComponent={animationSlug}
@@ -254,9 +248,9 @@ export default function Paywall({
         
         {showCheckout && (
           <div className="mt-16 flex flex-col items-center gap-10 border-t border-foreground/10 pt-32">
-            <Button href={checkoutUrl} onClick={handleCheckoutClick} theme="surface" size="xs">
+            <AnimatedButton href={checkoutUrl} onClick={handleCheckoutClick} theme="surface" size="xs">
               {monthlyPrice ? `Unlock everything - €${monthlyPrice}/mo` : "Unlock everything"}
-            </Button>
+            </AnimatedButton>
             <p className="text-accent-xs text-foreground-muted">
               Cancel anytime · 14-day money-back
             </p>

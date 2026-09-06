@@ -14,6 +14,7 @@ export {
   CaretDown,
   List,
   Lock,
+  CheckIcon,
 } from "@phosphor-icons/react";
 
 export const HeaderIcon1 = (props) => null;

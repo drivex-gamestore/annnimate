@@ -1,7 +1,7 @@
 import { Info } from 'lucide-react'; 
 
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'; // NOTE: original module id: 672706
-import { t } from '@/lib/i18n'; // NOTE: original module id: 398682
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@providers/TooltipProvider'; 
+import { t } from '@components/helpers/translate';
 import { usePppGeo } from '@hooks/usePppGeo'; 
 
 function getRegionName(countryCode) {
@@ -77,29 +77,3 @@ export default function PppBanner({ className = "", align = "center" }) {
     </aside>
   );
 }
-
-// ── SELF-AUDIT ──────────────────────────────────────────────
-// source_present:        [usePppMessage (s), getRegionName (IIFE inside s), PppLabel, PppBanner (default export)]
-// source_not_present:    [Info, TooltipProvider, Tooltip, TooltipTrigger, TooltipContent, t, usePppGeo]
-// third_party_deps:      [lucide-react]
-// plugins_registered:    []
-// inlined_libraries_detected: []
-// derived_import_paths:  [
-//   lucide-react: high confidence (standard Info icon w/ size prop), 
-//   @/components/ui/tooltip: medium confidence (Radix UI/Shadcn naming conventions),
-//   @/lib/i18n: medium confidence (standard translation util structure),
-//   @/hooks/usePppGeo: high confidence (React hook naming convention)
-// ]
-// renamed_identifiers:    [
-//   s -> usePppMessage,
-//   e.country -> geo.country,
-//   e (in IIFE) -> countryCode,
-//   e (in props) -> className,
-//   a (in props) -> align,
-//   n (in PppLabel) -> message,
-//   l (in PppBanner) -> message
-// ]
-// unresolved_keys:       [none]
-// fabricated_files_refused: [none requested]
-// framework_apis_preserved: [React hooks (usePppGeo context inferred), Intl.DisplayNames]
-// ─────────────────────────────────────────────────────────────
