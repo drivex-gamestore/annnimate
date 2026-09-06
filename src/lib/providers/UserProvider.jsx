@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { createClient } from "@/shared/supabaseClient"; 
+import { createClient } from "@lib/supabase/supabaseClient"; 
 import { trackRetention, analytics } from "@lib/analytics/analytics";
 
 function normalizeValue(value) {

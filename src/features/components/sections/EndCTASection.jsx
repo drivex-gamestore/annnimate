@@ -5,10 +5,10 @@ import { gsap } from "@lib/vendor";
 
 
 
-import { RevealHeadline } from "@/components/ui/RevealHeadline";
+import { RevealHeadline } from "@animations/components/RevealHeadline";
 
 
-import AnimatedText from "@/components/ui/AnimatedText";
+import AnimatedText from "@animations/components/AnimatedText";
 
 
 import Button from "@/components/ui/Button";

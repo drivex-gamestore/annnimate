@@ -5,7 +5,7 @@ import AnimatedButton from '@animations/components/AnimatedButton';
 import NavLink from "@components/NavLink";
 import RollerNumber from "@animations/components/RollerNumber";
 import { CheckList as FeatureList } from "@components/sections/FAQSection";
-import { PppLabel } from "@/components/pricing/PppLabel";
+import { PppLabel } from "@components/pricing/PppLabel";
 import SiteConfig, { effectiveCyclePrice, effectiveCycleTotal } from "@config/siteConfig";
 
 import { relativeShipped } from "@components/sections/JustShipped";

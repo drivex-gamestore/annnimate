@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect, Fragment } from "react";
 import { gsap, useGSAP } from "@lib/vendor";
 
 // NOTE: original module id: 499141
-import { Lock } from "@/components/icons";
+import { Lock } from "@components/assets/icons";
 
 import { useBreakpoint } from "@hooks/useBreakpoint";
 

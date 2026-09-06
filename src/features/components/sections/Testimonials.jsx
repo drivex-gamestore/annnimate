@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import AnimatedText from '@animations/components/AnimatedText.js';
+import AnimatedText from '@animations/components/AnimatedText';
 import { useBreakpoint } from '@hooks/useBreakpoint.js';
 import { t } from '@components/helpers/translate';
 const TestimonialsGlobe = dynamic(() => import('@lib/webgl/ImagesGlobe'), {

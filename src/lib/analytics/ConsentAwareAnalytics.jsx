@@ -2,9 +2,9 @@
 import { useState, useEffect, Suspense, Fragment } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
-import { createClient } from '../lib/supabase/client'; 
-import siteConfig from '../config/site'; 
-import { analytics } from '../lib/analytics'; 
+import { createClient } from '../supabase/supabaseClient'; 
+import siteConfig from '@config/siteConfig'; 
+import { analytics } from '../analytics/analytics'; 
 import { getConsent } from '@config/consent';
 
 const POSTHOG_KEY = 'phc_Yecr0Uo2VzDFAMckw6XdMeHxMC8JorR3xFeMYmtBm3v';

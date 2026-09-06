@@ -1,7 +1,7 @@
 import React from 'react';
 import { t } from '@components/helpers/translate';
-import AnimatedHeading from '@components/AnimatedHeading';
-import AnimatedText from '@components/AnimatedText';
+import AnimatedHeading from '@animations/components/AnimatedHeading';
+import AnimatedText from '@animations/components/AnimatedText';
 import NewsletterFrom from '@components/NewsletterEyebrow';
 
 export default function StarterPackSection({

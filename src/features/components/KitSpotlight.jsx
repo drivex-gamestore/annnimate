@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import CheckoutButton from "@components/checkout/CheckoutButton";
+import CheckoutButton from "@components/checkout/CheckOutButton";
 import KitPrice from "@components/checkout/KitPrice";
 import ShowreelVideo from "@components/sections/JustShipped";
 import { getKitPriceId } from "@config/siteConfig";

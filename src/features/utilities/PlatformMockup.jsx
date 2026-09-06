@@ -8,7 +8,7 @@ import NavLink from "@components/NavLink";
 import LogoMark from "@components/assets/icons/LogoMark";
 import LogoText from "@features/utilities/LogoText";
 import { useReveal } from "@hooks/useReveal";
-import { useUser } from "@providers/AppProviders";
+import { useUser } from "@providers/UserProvider";
 import { getDiscordLinkForUser } from "@/shared/discord";
 import { t } from "@components/helpers/translate";
 
@@ -29,7 +29,7 @@ import {
   HeaderIcon1, 
   HeaderIcon2, 
   HeaderIcon3, 
-} from "@/components/icons";
+} from "@components/assets/icons";
 
 gsap.registerPlugin(MotionPathPlugin, useGSAP);
 

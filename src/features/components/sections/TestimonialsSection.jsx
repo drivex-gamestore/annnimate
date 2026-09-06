@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react';
 
 import { useBreakpoint } from '@hooks/useBreakpoint';
 import { t } from '@components/helpers/translate';
-import AnimatedText from '@components/AnimatedText';
+import AnimatedText from '@animations/components/AnimatedText';
 
 const Globe = dynamic(() => import('@components/Globe'), { ssr: false });
 

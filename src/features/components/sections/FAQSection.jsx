@@ -7,16 +7,16 @@ import React, { useState, useCallback } from "react";
 // ─────────────────────────────────────────────────────────────
 
 // NOTE: original module id: 12895
-import { usePppTier, usePppGeo } from "@/hooks/usePppTier";
+import { usePppTier, usePppGeo } from "@hooks/usePppGeo";
 
 // NOTE: original module id: 400701
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 // NOTE: original module id: 963160
-import RevealHeadline from "@/components/ui/RevealHeadline";
+import RevealHeadline from "@animations/components/RevealHeadline";
 
 // NOTE: original module id: 218091
-import AnimatedText from "@/components/ui/AnimatedText";
+import AnimatedText from "@animations/components/AnimatedText";
 
 // NOTE: original module id: 687989
 import Button from "@/components/ui/Button";
@@ -25,10 +25,10 @@ import Button from "@/components/ui/Button";
 import FaqAccordionItem from "@/components/ui/FaqAccordionItem";
 
 // NOTE: original module id: 460391
-import Reveal from "@/components/ui/Reveal";
+import Reveal from "@/features/utilities/Reveal";
 
 // NOTE: original module id: 30910
-import { Info } from "@/components/icons";
+import { Info } from "@components/ui/Info";
 
 // NOTE: original module id: 672706
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/Tooltip";

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 
-import NavLink from "@/components/ui/NavLink";
+import NavLink from "@components/NavLink";
 import { cn } from "@lib/vendor";
 
 import { bunnyImageUrl } from "@config/bunnyImageUrl";

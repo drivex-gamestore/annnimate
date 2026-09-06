@@ -13,6 +13,7 @@ export {
   Funnel,
   CaretDown,
   List,
+  Lock,
 } from "@phosphor-icons/react";
 
 export const HeaderIcon1 = (props) => null;

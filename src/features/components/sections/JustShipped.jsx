@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import NavLink from "@components/NavLink";
 import AnimatedButton from "@animations/components/AnimatedButton";
-import { RevealHeadline } from "@/components/ui/RevealHeadline";
+import { RevealHeadline } from "@animations/components/RevealHeadline";
 import { SHOWREEL_SRC, SHOWREEL_POSTER } from "@/constants/media";
 
 export function relativeShipped(dateStr) {
