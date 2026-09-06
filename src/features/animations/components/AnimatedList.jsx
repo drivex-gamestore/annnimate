@@ -2,23 +2,7 @@
 
 import React, { useRef, Children } from "react";
 import { gsap } from "@lib/vendor";
-import { useReveal } from "@hooks/useReveal";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { useReveal } from "@hooks/useReveal"; 
 
 export default function AnimatedList({
   children,

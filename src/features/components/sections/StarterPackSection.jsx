@@ -1,11 +1,8 @@
 import React from 'react';
-
-
-import { t } from '@utils/i18n';
+import { t } from '@components/helpers/translate';
 import AnimatedHeading from '@components/AnimatedHeading';
 import AnimatedText from '@components/AnimatedText';
-import LeadForm from '@components/LeadForm';
-
+import NewsletterFrom from '@components/NewsletterEyebrow';
 
 export default function StarterPackSection({
   source = "homepage",
@@ -33,7 +30,7 @@ export default function StarterPackSection({
           </AnimatedText>
           
           <div className="mt-16 w-full max-w-[36rem] text-left">
-            <LeadForm
+            <NewsletterFrom
               source={source}
               idPrefix={idPrefix}
               buttonLabel={t("common.starterPack.buttonLabel")}

@@ -1,4 +1,4 @@
-import { sanityClient } from "@lib/sanity/client";
+import { sanityClient } from "@sanity/sanityClient";
 
 const previewImageProjection = `{
   "url": asset->url,

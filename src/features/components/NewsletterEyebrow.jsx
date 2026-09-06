@@ -5,7 +5,7 @@ import AnimatedButton from '@animations/components/AnimatedButton';
 import NavLink from '@components/NavLink';  
 import { analytics } from '@lib/analytics/analytics'; 
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;[span_1](start_span)[span_1](end_span)
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SPECIAL_SOURCES = new Set([
   "starter-pack",
   "animations-library",
@@ -17,7 +17,7 @@ const SPECIAL_SOURCES = new Set([
   "kit-reveal-page",
   "homepage",
   "pricing"
-]);[span_2](start_span)[span_2](end_span)
+]);
 
 export function NewsletterEyebrow({
   primary = "Weekly drop",
@@ -189,8 +189,7 @@ export default function NewsletterForm({
   const policyErrorId = `${policyId}-error`;
 
   const inputBaseClasses = `${inputSize === "lg" ? "text-body-lg pt-10 pb-20" : "text-body-sm pt-8 pb-16"} flex-1 min-w-0 rounded-none bg-transparent px-0 text-foreground placeholder:text-foreground-muted/60 focus:outline-none disabled:opacity-50 transition-colors duration-(--duration-quick) ease-(--ease-expo-out)`;
-  const emailBorderClasses = errors.email ? "border-b border-brand" : "border-b border-foreground/20 focus:border-foreground";[span_11](start_span)[span_11](end_span)
-
+  const emailBorderClasses = errors.email ? "border-b border-brand" : "border-b border-foreground/20 focus:border-foreground";
   return (
     <form ref={formRef} onSubmit={isSuccess ? handleProfileSubmit : handleSubmit} noValidate className={`flex flex-col gap-16 ${className}`}>
       {eyebrow || null}

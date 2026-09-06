@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { gsap, useGSAP, ScrollTrigger, SplitText } from '@lib/vendor';
-import { usePageEnterAnimation } from '@hooks/useAnimation'; 
+import { usePageEnterAnimation } from '@hooks/usePageEnterAnimation'; 
 import { useAnimation } from '@providers/AnimationProvider';
 
 export default function AnimatedText({

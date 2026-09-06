@@ -13,12 +13,9 @@ import { relativeShipped } from "@components/sections/JustShipped";
 import { isOfferActive } from "@config/siteConfig";
 
 import { getPppDisplayPrice, getPppEffectivePrice } from "@components/checkout/KitPrice";
-
 import { usePppTier } from "@hooks/usePppGeo";
-
 import { analytics } from "@lib/analytics/analytics";
-
-import { t } from "@/lib/i18n";
+import { t } from '@components/helpers/translate';
 
 const THEME_CLASSES = {
   dark: "bg-foreground text-background",

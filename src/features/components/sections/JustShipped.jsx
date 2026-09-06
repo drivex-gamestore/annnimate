@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import NavLink from "@components/NavLink";
-import AnimatedButton from "@components/ui/AnimatedButton";
+import AnimatedButton from "@animations/components/AnimatedButton";
 import { RevealHeadline } from "@/components/ui/RevealHeadline";
 import { SHOWREEL_SRC, SHOWREEL_POSTER } from "@/constants/media";
 

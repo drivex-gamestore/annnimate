@@ -34,11 +34,12 @@ import Reveal from "@features/utilities/Reveal";
 import PlatformMockup from "@features/utilities/PlatformMockup"; 
 import KitSpotlight from "@components/KitSpotlight"; 
 import Footer from "@features/layout/footer/Footer";
+
 import AnimatedButton from "@animations/components/AnimatedButton";
 import AnimatedText from "@animations/components/AnimatedText"; 
 import AnimatedList from "@animations/components/AnimatedList"; 
 import PricingCycleToggle from "@animations/components/PricingCycleToggle"; 
-import PricingCard from "@components/ui/PricingCard";
+import PricingCard from "@components/pricing/PricingCard";
 import ImageLayout from "@components/ImageLayout";
 import RevealHeadline from "@animations/components/RevealHeadline"; 
 import TestimonialsSection from "@components/sections/TestimonialsSection"; 

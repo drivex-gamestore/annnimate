@@ -1,4 +1,4 @@
-import { sanityClient } from "@lib/sanity/client";
+import { sanityClient } from "@sanity/sanityClient";
 
 export async function getProjectBySlug(slug) {
   const query = `*[_type == "project" && slug.current == $slug][0]{

@@ -34,7 +34,7 @@ import { Info } from "@/components/icons";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/Tooltip";
 
 // NOTE: original module id: 398682
-import { t } from "@/lib/i18n";
+import { t } from '@components/helpers/translate';
 
 
 // ============================================================================

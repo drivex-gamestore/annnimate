@@ -12,28 +12,6 @@ import React, {
 import { gsap, useGSAP } from "@lib/vendor";
 import { useReveal } from '@hooks/useReveal';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const RevealHeadline = forwardRef(function RevealHeadline(
   {
     children,
@@ -187,21 +165,6 @@ const DESKTOP_RING_SIZE = `calc(${SCALED_COL} * 2)`;
 const OFFSET_X = `calc(${COL_WIDTH} * 0.5)`;
 const ITEM_W = `calc(${SCALED_COL} * 0.32)`;
 const ITEM_H = `calc(${ITEM_W} * 9 / 16)`;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default function RingGallery({ side, images = [] }) {
   const itemRefs = useRef([]);

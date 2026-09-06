@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@lib/bendor";
+import { cn } from "@lib/vendor";
 
 const VALID_PROVENANCE_TYPES = new Set([
   "client_commissioned",

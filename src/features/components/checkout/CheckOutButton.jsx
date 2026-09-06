@@ -4,7 +4,7 @@ import React from "react";
 import AnimatedButton from '@animations/components/AnimatedButton'; 
 import { analytics } from "@lib/analytics/analytics";
 
-import { usePppTier } from "@/hooks/usePppTier";
+import { usePppTier } from "@hooks/usePppQeo";
 
 export default function CheckoutButton({
   priceId,

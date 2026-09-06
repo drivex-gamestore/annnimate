@@ -3,7 +3,6 @@
 import React from "react";
 import { usePppTier } from "@hooks/usePppGeo";
 
-
 const PPP_PLANS = {
   solo: {
     quarterly: { list: 87, T2: 42, T3: 30 },
@@ -42,7 +41,6 @@ export function getPppDisplayPrice(plan, cycle, tier) {
     ? { price: Math.ceil(effectivePrice / 3), cycleTotal: effectivePrice }
     : { price: effectivePrice, cycleTotal: null };
 }
-
 
 export default function KitPrice({ kitSlug, fallback = null, struckClassName = "" }) {
   const pppTier = usePppTier();

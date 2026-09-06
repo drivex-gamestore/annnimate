@@ -8,7 +8,7 @@ import NavLink from "@components/NavLink";
 import LogoMark from "@components/assets/icons/LogoMark";
 import LogoText from "@features/utilities/LogoText";
 import { useReveal } from "@hooks/useReveal";
-import { useUser } from "@hooks/useUser";
+import { useUser } from "@providers/AppProviders";
 import { getDiscordLinkForUser } from "@/shared/discord";
 import { t } from "@components/helpers/translate";
 

@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 import { useBreakpoint } from '@hooks/useBreakpoint';
-import { t } from '@utils/i18n';
+import { t } from '@components/helpers/translate';
 import AnimatedText from '@components/AnimatedText';
 
 const Globe = dynamic(() => import('@components/Globe'), { ssr: false });

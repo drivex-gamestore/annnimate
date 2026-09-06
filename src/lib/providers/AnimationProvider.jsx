@@ -11,7 +11,6 @@ import React, {
 
 import { usePathname } from "next/navigation";
 
-
 let isPerfEnabledCache = null;
 
 function isPerfEnabled() {

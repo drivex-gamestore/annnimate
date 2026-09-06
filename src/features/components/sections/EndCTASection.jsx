@@ -16,7 +16,7 @@ import Button from "@/components/ui/Button";
 
 import RingGallery, { RING_SECTION_MIN_VH } from "@/components/sections/RingGallery";
 import { useReveal } from "@/hooks/useReveal";
-import { t } from "@/lib/i18n";
+import { t } from '@components/helpers/translate';
 
 const DEFAULT_HEADLINE = t("common.endCta.headline");
 const DEFAULT_SUBTEXT = t("common.endCta.subtext");

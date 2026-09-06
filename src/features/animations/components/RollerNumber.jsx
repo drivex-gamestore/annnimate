@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import { gsap, useGSAP, ScrollTrigger } from "@lib/vendor";
-import { usePageEnterAnimation } from "@hooks/useAnimation";
+import { usePageEnterAnimation } from '@hooks/usePageEnterAnimation'; 
 
 const debugLog = (...args) => {};
 export default function RollerNumber({
