@@ -28,7 +28,7 @@ export {
     ScrambleTextPlugin, 
     Draggable,
     Flip,
-    InertiaPlugin
+    InertiaPlugin,
     MotionPathPlugin
  };
 
