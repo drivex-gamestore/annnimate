@@ -1,19 +1,20 @@
+'use client';
+
 import React, { useRef, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-
-import { useBreakpoint } from '@hooks/useBreakpoint';
-import { t } from '@utils/i18n';
-import AnimatedText from '@components/AnimatedText';
-
-const Globe = dynamic(() => import('@components/Globe'), { ssr: false });
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import AnimatedText from '@animations/components/AnimatedText.js';
+import { useBreakpoint } from '@hooks/useBreakpoint.js';
+import { t } from '@components/helpers/translate';
+const TestimonialsGlobe = dynamic(() => import('@lib/webgl/ImagesGlobe'), {
+  ssr: false
+});
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-
-const AVATARS = [
+const avatarImages = [
   "/imgs/lukas_avatar.avif",
   "/imgs/edoardo_avatar.avif",
   "/imgs/matthew_avatar.avif"
@@ -21,10 +22,10 @@ const AVATARS = [
 
 export const TESTIMONIALS = t("common.testimonials.items").map((item, index) => ({
   ...item,
-  avatarSrc: AVATARS[index]
+  avatarSrc: avatarImages[index]
 }));
 
-const Y_OFFSETS = [80, 56, 120];
+const yOffsets = [80, 56, 120];
 
 export function TestimonialCard({
   body,
@@ -37,13 +38,13 @@ export function TestimonialCard({
   revealTrigger = "manual"
 }) {
   const initial = name?.trim()?.[0]?.toUpperCase() || "?";
-  const textRef = useRef(null);
+  const animationReadyRef = useRef(null);
   const hasPlayedRef = useRef(false);
 
   useEffect(() => {
-    if (wantsPlay && !hasPlayedRef.current && textRef.current) {
+    if (wantsPlay && !hasPlayedRef.current && animationReadyRef.current) {
       hasPlayedRef.current = true;
-      textRef.current();
+      animationReadyRef.current();
     }
   }, [wantsPlay]);
 
@@ -62,13 +63,17 @@ export function TestimonialCard({
         ease="power2.out"
         animationProps={{ yPercent: 100 }}
         triggerMode={revealTrigger === "scroll" ? "scroll" : "manual"}
-        onReady={revealTrigger === "scroll" ? undefined : (readyFn) => {
-          textRef.current = readyFn;
-          if (wantsPlay && !hasPlayedRef.current) {
-            hasPlayedRef.current = true;
-            readyFn();
-          }
-        }}
+        onReady={
+          revealTrigger === "scroll"
+            ? undefined
+            : (startAnimation) => {
+                animationReadyRef.current = startAnimation;
+                if (wantsPlay && !hasPlayedRef.current) {
+                  hasPlayedRef.current = true;
+                  startAnimation();
+                }
+              }
+        }
       >
         {body}
       </AnimatedText>
@@ -99,20 +104,19 @@ export function TestimonialCard({
   );
 }
 
-
 export default function TestimonialsSection({ images = [], globe = true }) {
   const sectionRef = useRef(null);
-  const globeWrapperRef = useRef(null);
+  const globeRef = useRef(null);
   const cardsRef = useRef([]);
-  const isLg = useBreakpoint("lg");
+  const isLgBreakpoint = useBreakpoint("lg");
 
   useGSAP(() => {
-    if (!isLg) return;
+    if (!isLgBreakpoint) return;
 
-    const globeEl = globeWrapperRef.current;
-    const cards = cardsRef.current.filter(Boolean);
+    const globeEl = globeRef.current;
+    const cardEls = cardsRef.current.filter(Boolean);
 
-    if (!globeEl && cards.length === 0) return;
+    if (!globeEl && cardEls.length === 0) return;
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
@@ -130,18 +134,18 @@ export default function TestimonialsSection({ images = [], globe = true }) {
       tl.to(globeEl, { autoAlpha: 0, duration: 0.25 }, 0.65);
     }
 
-    cards.forEach((card, index) => {
-      const yOffset = Y_OFFSETS[index] ?? 24;
-      tl.fromTo(card, { y: yOffset }, { y: -yOffset, duration: 1, force3D: true }, 0);
+    cardEls.forEach((cardEl, index) => {
+      const yOffset = yOffsets[index] ?? 24;
+      tl.fromTo(cardEl, { y: yOffset }, { y: -yOffset, duration: 1, force3D: true }, 0);
     });
-  }, { scope: sectionRef, dependencies: [isLg] });
+  }, { scope: sectionRef, dependencies: [isLgBreakpoint] });
 
   const [wantsPlay, setWantsPlay] = useState(false);
   const [globeActive, setGlobeActive] = useState(false);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
 
     const playObserver = new IntersectionObserver(([entry]) => {
       if (entry?.isIntersecting) {
@@ -150,24 +154,32 @@ export default function TestimonialsSection({ images = [], globe = true }) {
       }
     }, { rootMargin: "0px 0px -40% 0px" });
 
-    const activeObserver = new IntersectionObserver(([entry]) => {
+    const globeObserver = new IntersectionObserver(([entry]) => {
       setGlobeActive(entry?.isIntersecting ?? false);
     }, { rootMargin: "300px 0px 300px 0px" });
 
-    playObserver.observe(el);
-    activeObserver.observe(el);
+    playObserver.observe(sectionEl);
+    globeObserver.observe(sectionEl);
 
     return () => {
       playObserver.disconnect();
-      activeObserver.disconnect();
+      globeObserver.disconnect();
     };
   }, []);
 
   return (
-    <section ref={sectionRef} data-theme="light" className="testimonials relative bg-background text-foreground overflow-hidden">
-      {isLg && globe ? (
-        <div ref={globeWrapperRef} className="testimonials-globe absolute inset-0 opacity-0" aria-hidden="true">
-          <Globe images={images} wantsPlay={wantsPlay} active={globeActive} />
+    <section
+      ref={sectionRef}
+      data-theme="light"
+      className="testimonials relative bg-background text-foreground overflow-hidden"
+    >
+      {isLgBreakpoint && globe ? (
+        <div
+          ref={globeRef}
+          className="testimonials-globe absolute inset-0 opacity-0"
+          aria-hidden="true"
+        >
+          <TestimonialsGlobe images={images} wantsPlay={wantsPlay} active={globeActive} />
         </div>
       ) : null}
 
@@ -182,15 +194,24 @@ export default function TestimonialsSection({ images = [], globe = true }) {
         </div>
 
         <div className="relative grid grid-cols-12 grid-rows-[repeat(3,min-content)] gap-x-24 gap-y-16 lg:gap-y-24 lg:px-64">
-          <div ref={el => (cardsRef.current[0] = el)} className="col-span-12 lg:col-span-4 lg:col-start-2 lg:row-start-1 pointer-events-auto">
+          <div
+            ref={(el) => (cardsRef.current[0] = el)}
+            className="col-span-12 lg:col-span-4 lg:col-start-2 lg:row-start-1 pointer-events-auto"
+          >
             <TestimonialCard {...TESTIMONIALS[0]} wantsPlay={wantsPlay} />
           </div>
 
-          <div ref={el => (cardsRef.current[1] = el)} className="col-span-12 lg:col-span-4 lg:col-start-8 lg:row-start-2 pointer-events-auto">
+          <div
+            ref={(el) => (cardsRef.current[1] = el)}
+            className="col-span-12 lg:col-span-4 lg:col-start-8 lg:row-start-2 pointer-events-auto"
+          >
             <TestimonialCard {...TESTIMONIALS[1]} wantsPlay={wantsPlay} />
           </div>
 
-          <div ref={el => (cardsRef.current[2] = el)} className="col-span-12 lg:col-span-4 lg:col-start-3 lg:row-start-3 pointer-events-auto">
+          <div
+            ref={(el) => (cardsRef.current[2] = el)}
+            className="col-span-12 lg:col-span-4 lg:col-start-3 lg:row-start-3 pointer-events-auto"
+          >
             <TestimonialCard {...TESTIMONIALS[2]} wantsPlay={wantsPlay} />
           </div>
         </div>
@@ -198,3 +219,4 @@ export default function TestimonialsSection({ images = [], globe = true }) {
     </section>
   );
 }
+

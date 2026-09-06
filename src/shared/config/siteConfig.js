@@ -143,10 +143,6 @@ export function effectiveCycleTotal(cycleObj) {
   return cycleObj.listCycleTotal ?? cycleObj.cycleTotal;
 }
 
-
-
-
-
 const siteConfig = {
   appName: "Annnimate",
   appDescription: "Production GSAP motion components for React and Vue. Every component shipped on a real brand site before it reached the library. By Good Fella.",

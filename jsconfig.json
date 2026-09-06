@@ -19,7 +19,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@components/*": ["./src/features/components/*"],
       "@animations/*": ["./src/features/animations/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@shared/*": ["./src/shared/*"],
+      "@sanity/*": ["./src/sanity/*"]
     }
   },
   "include": [

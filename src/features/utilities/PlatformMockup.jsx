@@ -2,16 +2,15 @@
 
 import React, { useRef, useState, useMemo, useEffect, Fragment } from "react";
 import { gsap, useGSAP, MotionPathPlugin } from "@lib/vendor";
-
 import RollerNumber from "@animations/components/RollerNumber";
-import AnimationCard from "@/components/cards/AnimationCard";
-import Link from "@/components/ui/Link";
-import LogoMark from "@/components/logos/LogoMark";
-import LogoText from "@/components/logos/LogoText";
-import { useReveal } from "@/hooks/useReveal";
-import { useUser } from "@/hooks/useUser";
-import { getDiscordLinkForUser } from "@/utils/discord";
-import { t } from "@/lib/i18n";
+import AnimationCard from "@animations/components/AnimationCard";
+import NavLink from "@components/NavLink";
+import LogoMark from "@components/assets/icons/LogoMark";
+import LogoText from "@features/utilities/LogoText";
+import { useReveal } from "@hooks/useReveal";
+import { useUser } from "@hooks/useUser";
+import { getDiscordLinkForUser } from "@/shared/discord";
+import { t } from "@components/helpers/translate";
 
 import {
   SquaresFour, 
@@ -83,9 +82,9 @@ function NavItem({ icon: Icon, label, active = false, href, external = false }) 
       {content}
     </a>
   ) : (
-    <Link href={href} className={baseClass}>
+    <NavLink href={href} className={baseClass}>
       {content}
-    </Link>
+    </NavLink>
   );
 }
 

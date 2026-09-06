@@ -6,10 +6,8 @@ import { gsap, useGSAP } from "@lib/vendor";
 // NOTE: original module id: 499141
 import { Lock } from "@/components/icons";
 
-// NOTE: original module id: 400701
-import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { useBreakpoint } from "@hooks/useBreakpoint";
 
-// NOTE: original module id: 943348
 import { analytics } from "@/lib/analytics";
 
 // NOTE: original module id: 42242
@@ -30,18 +28,9 @@ import Link from "@/components/ui/Link";
 // NOTE: original module id: 967791
 import { TESTIMONIALS } from "@/constants/testimonials";
 
-// NOTE: original module id: 516799
-import SiteConfig, { effectiveCyclePrice } from "@/config/siteConfig";
+import SiteConfig, { effectiveCyclePrice } from "@config/siteConfig";
 
-// ─────────────────────────────────────────────────────────────
-// CONSTANTS & HELPERS
-// ─────────────────────────────────────────────────────────────
 
-/*
- * MANGLED VARIABLE MAPPING:
- * p -> testimonial
- * x -> STARTER_PACK_ITEMS
- */
 const testimonial = TESTIMONIALS[2] || null;
 
 const STARTER_PACK_ITEMS = [
@@ -63,19 +52,7 @@ const STARTER_PACK_ITEMS = [
   }
 ];
 
-// ─────────────────────────────────────────────────────────────
-// COMPONENTS
-// ─────────────────────────────────────────────────────────────
 
-/*
- * MANGLED VARIABLE MAPPING:
- * g -> StarterPackThumbs
- * e -> className
- * i -> items
- * s -> displayItems
- * l -> containerRef
- * o -> marqueeRef
- */
 export function StarterPackThumbs({ className = "", items = null }) {
   const displayItems = items && items.length ? items : STARTER_PACK_ITEMS;
   const containerRef = useRef(null);
@@ -140,10 +117,7 @@ export function StarterPackThumbs({ className = "", items = null }) {
   );
 }
 
-/*
- * MANGLED VARIABLE MAPPING:
- * v -> FreeChip
- */
+
 export function FreeChip() {
   return (
     <span className="text-accent-xs inline-flex h-24 items-center bg-brand px-8 font-medium text-[#141314]">
@@ -152,10 +126,6 @@ export function FreeChip() {
   );
 }
 
-/*
- * MANGLED VARIABLE MAPPING:
- * y -> LockIconWrap
- */
 function LockIconWrap() {
   return (
     <span className="flex size-32 items-center justify-center border border-foreground/15 bg-background">
@@ -164,30 +134,7 @@ function LockIconWrap() {
   );
 }
 
-/*
- * MANGLED VARIABLE MAPPING:
- * b -> Paywall (default export)
- * e -> animation
- * n -> isAuthenticated
- * r -> starterPack
- * i -> trackShown
- * f -> showCheckout
- * x -> isDesktop
- * j -> animationName
- * w -> animationSlug
- * k -> isInStarterPack
- * N -> libraryCount
- * E -> soloPlan
- * H -> monthlyPrice
- * S -> checkoutUrl
- * V -> unlockLabel
- * A -> isDesktopUnauth
- * _ -> isSubscriber
- * M -> setIsSubscriber
- * T -> trackRef
- * C -> handleCheckoutClick
- * L -> checkoutBlock
- */
+
 export default function Paywall({
   animation = null,
   isAuthenticated = false,

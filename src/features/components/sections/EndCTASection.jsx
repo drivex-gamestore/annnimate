@@ -15,23 +15,8 @@ import Button from "@/components/ui/Button";
 
 
 import RingGallery, { RING_SECTION_MIN_VH } from "@/components/sections/RingGallery";
-
-
 import { useReveal } from "@/hooks/useReveal";
-
-
 import { t } from "@/lib/i18n";
-
-
-
-
-
-
-
-
-
-
-
 
 const DEFAULT_HEADLINE = t("common.endCta.headline");
 const DEFAULT_SUBTEXT = t("common.endCta.subtext");
@@ -43,27 +28,6 @@ const DEFAULT_SECONDARY_CTA = {
   label: t("common.endCta.secondaryLabel"),
   href: "/animations"
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

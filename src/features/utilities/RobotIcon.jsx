@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
-
-import IconBase from '../components/IconBase'; 
+import IconBase from '@components/ui/IconBase'; 
 
 const weights = new Map([
   [
