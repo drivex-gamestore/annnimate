@@ -71,41 +71,41 @@ const shadowsIntoLight = LocalFont({
 export const metadata = {
   metadataBase: new URL(
     process.env.NODE_ENV === 'production'
-      ? 'https://drivexstore.shop'
+      ? 'https://annnimate.com'
       : 'http://localhost:3000'
   ),
-  title: 'Drive X Store',
+  title: 'Annnimate',
   description:
-    'Drive X is a gaming marketplace for buying and selling game accounts, items, and digital gaming products.',
+    'Annnimate is a production-ready GSAP component library for React, Vue and HTML, built to the standard used for real brands.',
   keywords: [
-    'Drive X',
-    'Drive X Store',
-    'game accounts',
-    'game items',
-    'gaming marketplace',
-    'digital game store',
+    'Annnimate',
+    'GSAP components',
+    'React animation library',
+    'Vue animation library',
+    'web animation',
+    'GSAP React',
   ],
   openGraph: {
-    title: 'Drive X Store',
+    title: 'Annnimate',
     description:
-      'A trusted gaming marketplace for game accounts, items, and digital gaming products.',
+      'Production-ready GSAP components for React, Vue and HTML, built to the standard used for real brands.',
     type: 'website',
-    siteName: 'Drive X Store',
-    url: 'https://drivexstore.shop',
+    siteName: 'Annnimate',
+    url: 'https://annnimate.com',
     images: [
       {
         url: '/images/og-image.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Drive X Store',
+        alt: 'Annnimate',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Drive X Store',
+    title: 'Annnimate',
     description:
-      'Shop game accounts, items, and digital gaming products at Drive X Store.',
+      'Production-ready GSAP components for React, Vue and HTML, at Annnimate.',
     images: ['/images/og-image.jpeg'],
   },
 };
@@ -115,31 +115,31 @@ export default async function RootLayout({ children }) {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': 'https://drivexstore.shop/#website',
-    url: 'https://drivexstore.shop',
-    name: 'Drive X Store',
+    '@id': 'https://annnimate.com/#website',
+    url: 'https://annnimate.com',
+    name: 'Annnimate',
     inLanguage: 'en',
   };
 
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://drivexstore.shop/#organization',
-    name: 'Drive X Store',
-    url: 'https://drivexstore.shop',
-    logo: 'https://drivexstore.shop/images/og-image.jpeg',
+    '@id': 'https://annnimate.com/#organization',
+    name: 'Annnimate',
+    url: 'https://annnimate.com',
+    logo: 'https://annnimate.com/images/og-image.jpeg',
   };
 
   const navigationSchema = {
     '@context': 'https://schema.org',
     '@type': 'SiteNavigationElement',
-    '@id': 'https://drivexstore.shop/#navigation',
-    name: 'Drive X Store Navigation',
-    url: 'https://drivexstore.shop',
+    '@id': 'https://annnimate.com/#navigation',
+    name: 'Annnimate Navigation',
+    url: 'https://annnimate.com',
     hasPart: [
-      { '@type': 'WebPage', name: 'Home', url: 'https://drivexstore.shop/' },
-      { '@type': 'WebPage', name: 'About', url: 'https://drivexstore.shop/about' },
-      { '@type': 'WebPage', name: 'Work', url: 'https://drivexstore.shop/work' },
+      { '@type': 'WebPage', name: 'Home', url: 'https://annnimate.com/' },
+      { '@type': 'WebPage', name: 'Pricing', url: 'https://annnimate.com/pricing' },
+      { '@type': 'WebPage', name: 'Animations', url: 'https://annnimate.com/animations' },
     ],
   };
 
