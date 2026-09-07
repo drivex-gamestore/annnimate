@@ -313,4 +313,4 @@ const siteConfig = {
   }
 };
 
-export default SiteConfig;
+export default siteConfig;
