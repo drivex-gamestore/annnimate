@@ -1,7 +1,8 @@
 import { createBrowserClient } from "@supabase/ssr";
+import { env } from "env";
 
-const SUPABASE_URL = "https://btqhhilvtlnfwqglbfki.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0cWhoaWx2dGxuZndxZ2xiZmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1OTY5NzcsImV4cCI6MjEwNDE3Mjk3N30.8VKIe6_5eUvrtnZ5RXfIwFSoC3qNuMTF4v7srowK_T4";
+const SUPABASE_URL = env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY = env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export function createClient() {
   return createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
