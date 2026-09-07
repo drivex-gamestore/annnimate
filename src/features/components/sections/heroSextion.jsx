@@ -1850,7 +1850,7 @@ const CustomCursor = forwardRef(function (
 
 
 
-export default function LandingClient({ animations = [], shippedRecently = 0 }) { 
+export default function LandingClient({ animations = [], shippedRecently = 0, latestAnimation = null }) { 
   const imagesWithPreviews = useMemo(() => animations.filter((anim) => anim.preview_image_url), [animations]); 
   const previewImageUrls = useMemo(() => imagesWithPreviews.map((anim) => anim.preview_image_url), [imagesWithPreviews]); 
   
@@ -1915,8 +1915,8 @@ export default function LandingClient({ animations = [], shippedRecently = 0 }) 
         <StarterPackSection theme="dark" />
         <PricingSection shippedRecently={shippedRecently} />
         <ValueMath cta={{ label: t("common.valueMath.ctaLanding"), href: "/pricing" }} />
-        <Footer />
         <EndCTA images={previewImageUrls} bleed={true} />
+        <Footer latestAnimation={latestAnimation} />
       </div>
     </CustomCursor>
   );
