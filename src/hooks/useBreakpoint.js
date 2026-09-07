@@ -27,3 +27,6 @@ export function useBreakpoint(breakpoint) {
     () => false
   );
 }
+
+
+export default useBreakpoint;

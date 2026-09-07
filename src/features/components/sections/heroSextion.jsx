@@ -16,22 +16,22 @@ import CocaColaLogo from "@components/assets/logos/CocaCola";
 import BodyArmorLogo from "@components/assets/logos/BodyArmor";
 import WKNDHRSLogo from "@components/assets/logos/WKNDHRS";
 import PoweradeLogo from "@components/assets/logos/Powerade";
-import { MagnifyingGlass } from "@components/assets/icons/MagnifyingGlass";
-import { Funnel } from "@components/assets/icons/Funnel";
-import { GridFour } from "@components/assets/icons/GridFour";
-import { Columns } from "@components/assets/icons/Columns";
-import { List } from "@components/assets/icons/List";
-import { Copy } from "@components/assets/icons/Copy";
-import { Check } from "@components/assets/icons/Check";
+import MagnifyingGlass from "@components/assets/icons/MagnifyingGlass";
+import Funnel from "@components/assets/icons/Funnel";
+import GridFour from "@components/assets/icons/GridFour";
+import Columns from "@components/assets/icons/Columns";
+import List from "@components/assets/icons/List";
+import Copy from "@components/assets/icons/Copy";
+import Check from "@components/assets/icons/Check";
 
 import { t } from "@components/helpers/translate";
 import { useAnimation, usePageEnterAnimation } from "@providers/AnimationProvider";
 import { useReveal } from "@hooks/useReveal";
-import useBreakpoint from "@hooks/useBreakpoint";
+import { useBreakpoint } from "@hooks/useBreakpoint";
 import { useTransitionRouter } from "@providers/TransitionRouterProvider";
 
 import RingGallery from "@components/sections/RingGallery";
-import JustShipped from "@components/sections/JustShipped";
+import ShowreelVideo, { JustShipped } from "@components/sections/JustShipped";
 import ValueMath from "@components/sections/ValueMath";
 import FAQSection from "@components/sections/FAQSection";
 import EndCTASection from "@components/sections/EndCTASection";
@@ -45,12 +45,6 @@ import ImagesGlobe from "@lib/webgl/ImagesGlobe";
 import siteConfig from "@shared/config/siteConfig";
 import { loadSharedImage as preloadSharedImages } from "@shared/loadSharedImage";
 import { perfLog } from "@shared/performance";
-
-// NOTE: original module id:572332
-import AnimationGallery from "@features/animations/components/AnimationGallery";
-
-import PlatformMockup from "@features/utilities/PlatformMockup";
-
 
 function GoodFellaLogo({ className = "" }) {
   return (
@@ -141,9 +135,9 @@ function HeroSection({ animations = [], count = 0, pool = [] }) {
       </div>
       <div className="relative mt-40 mb-[-80px] lg:mt-80 lg:mb-[-120px]">
         <div className="v2-container">
-        {animations.length > 0 && (
-          <PlatformMockup animations={animations} totalCount={count} revealOnPageEnter={true} filterBarDemo={true} filterPool={pool} />
-        )}
+          {animations.length > 0 && (
+            <PlatformMockup animations={animations} totalCount={count} revealOnPageEnter={true} filterBarDemo={true} filterPool={pool} />
+          )}
         </div>
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-[560px] lg:h-[820px]" style={{ background: "linear-gradient(to bottom, transparent 0%, var(--background) 90%)" }}></div>
       </div>
@@ -899,7 +893,7 @@ function TwoWaysSection({ images = [], animations = [], cursorRef = null }) {
           </article>
           <article className="col-span-12 flex flex-col overflow-hidden bg-surface text-foreground lg:col-span-5">
             <div className="relative h-[280px] w-full overflow-hidden lg:h-[480px]">
-              <PlatformMockup className="h-full w-full" label="The Menu Kit showreel" />
+              <ShowreelVideo className="h-full w-full" label="The Menu Kit showreel" />
             </div>
             <div className="flex flex-1 flex-col gap-20 p-24 lg:p-32">
               <div className="flex flex-wrap items-baseline justify-between gap-16">
@@ -1630,12 +1624,8 @@ export default function LandingClient({ animations = [], shippedRecently = 0 }) 
         <HowItWorksSection animations={animations} />
         <OneComponentSection />
         <TwoWaysSection images={previewImages} animations={animations} cursorRef={cursorNode} />
-        {/* FIX: this slot takes {items, count} in the bundle — that's JustShipped's
-            shape, not Testimonials'. Duplicate/wrong component removed. */}
         <JustShipped items={animations} count={animations.length} />
         <ImagesGlobe images={previewImages} />
-        {/* FIX: this slot only ever receives {theme} in the bundle — a static
-            themed promo block, i.e. StarterPackSection, not JustShipped again. */}
         <StarterPackSection theme="dark" />
         <PricingSection shippedRecently={shippedRecently} />
         <ValueMath cta={{ label: t("common.valueMath.ctaLanding"), href: "/pricing" }} />
