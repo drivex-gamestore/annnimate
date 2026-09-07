@@ -9,17 +9,8 @@ import React, {
   useEffect
 } from "react";
 
-
-
-
-
 import { gsap } from "@lib/vendor";
-
-
-
-import { bunnyImageUrl } from "@/lib/imageUtils";
-
-
+import { bunnyImageUrl } from "@config/bunnyImageUrl";
 
 
 const DEFAULT_LAYOUT = {

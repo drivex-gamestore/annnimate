@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import NavLink from "@components/NavLink";
 import AnimatedButton from "@animations/components/AnimatedButton";
 import { RevealHeadline } from "@animations/components/RevealHeadline";
-import { SHOWREEL_SRC, SHOWREEL_POSTER } from "@/constants/media";
+import { SHOWREEL_SRC, SHOWREEL_POSTER } from "@config/media";
 
 export function relativeShipped(dateStr) {
   if (!dateStr) return null;

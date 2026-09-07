@@ -3,19 +3,11 @@
 import React, { useRef } from "react";
 import { gsap } from "@lib/vendor";
 
-
-
 import { RevealHeadline } from "@animations/components/RevealHeadline";
-
-
 import AnimatedText from "@animations/components/AnimatedText";
-
-
-import Button from "@/components/ui/Button";
-
-
-import RingGallery, { RING_SECTION_MIN_VH } from "@/components/sections/RingGallery";
-import { useReveal } from "@/hooks/useReveal";
+import AnimatedButton from "@animations/components/AnimatedButton";
+import RingGallery, { RING_SECTION_MIN_VH } from "@components/sections/RingGallery";
+import { useReveal } from "@hooks/useReveal";
 import { t } from '@components/helpers/translate';
 
 const DEFAULT_HEADLINE = t("common.endCta.headline");
@@ -114,14 +106,14 @@ export default function EndCTA({
             
             <div className="mt-8 flex flex-col items-center gap-16 sm:flex-row sm:gap-12">
               {primaryCta && (
-                <Button href={primaryCta.href} theme="brand" size={buttonSize}>
+                <AnimatedButton href={primaryCta.href} theme="brand" size={buttonSize}>
                   {primaryCta.label}
-                </Button>
+                </AnimatedButton>
               )}
               {secondaryCta && (
-                <Button href={secondaryCta.href} theme="surface" size={buttonSize}>
+                <AnimatedButton href={secondaryCta.href} theme="surface" size={buttonSize}>
                   {secondaryCta.label}
-                </Button>
+                </AnimatedButton>
               )}
             </div>
             

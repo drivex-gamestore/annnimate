@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';

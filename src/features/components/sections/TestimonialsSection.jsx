@@ -8,7 +8,7 @@ import { useBreakpoint } from '@hooks/useBreakpoint';
 import { t } from '@components/helpers/translate';
 import AnimatedText from '@animations/components/AnimatedText';
 
-const Globe = dynamic(() => import('@components/Globe'), { ssr: false });
+const Globe = dynamic(() => import('@lib/webgl/ImagesGlobe'), { ssr: false });
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { Fragment, forwardRef } from "react";
-import BaseIcon from "@components/BaseIcon";
+
+import IconBase from "@components/ui/IconBase"; 
 
 /*
  * MANGLED VARIABLE MAPPING:
@@ -51,7 +52,7 @@ const ARROW_WEIGHTS = new Map([
 ]);
 
 export const ArrowUpRight = forwardRef((props, ref) => (
-  <BaseIcon ref={ref} {...props} weights={ARROW_WEIGHTS} />
+  <IconBase ref={ref} {...props} weights={ARROW_WEIGHTS} />
 ));
 
 ArrowUpRight.displayName = "ArrowUpRightIcon";

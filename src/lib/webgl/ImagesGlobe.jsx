@@ -5,10 +5,8 @@ import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 
-// NOTE: original module id: 457714
-import { loadSharedImage } from '@/shared/loadSharedImage';
+import { loadSharedImage } from '@shared/loadSharedImage';
 
-// ── MODULE 143848: useWebGLSupport ─────────────────────────
 let cachedWebGLSupport;
 
 function checkWebGLSupport() {

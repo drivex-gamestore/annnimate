@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@lib/vendor';
 
 export default function Switch({ checked, disabled = false, onChange, label, className }) {
   return (

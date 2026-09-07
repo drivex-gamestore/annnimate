@@ -1,49 +1,22 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-
-// ─────────────────────────────────────────────────────────────
-// IMPORT MAPPING & SOURCE NOT PRESENT STUBS
-// ─────────────────────────────────────────────────────────────
-
-// NOTE: original module id: 12895
 import { usePppTier, usePppGeo } from "@hooks/usePppGeo";
-
-// NOTE: original module id: 400701
-import { useBreakpoint } from "@/hooks/useBreakpoint";
-
-// NOTE: original module id: 963160
+import { useBreakpoint } from "@hooks/useBreakpoint";
 import RevealHeadline from "@animations/components/RevealHeadline";
-
-// NOTE: original module id: 218091
 import AnimatedText from "@animations/components/AnimatedText";
-
-// NOTE: original module id: 687989
-import Button from "@/components/ui/Button";
-
-// NOTE: original module id: 327018
-import FaqAccordionItem from "@/components/ui/FaqAccordionItem";
-
-// NOTE: original module id: 460391
-import Reveal from "@/features/utilities/Reveal";
-
-// NOTE: original module id: 30910
+import AnimatedButton from "@animations/components/AnimatedButton";
+import FaqAccordionItem from "@components/FaqAccordionItem";
+import Reveal from "@features/utilities/Reveal";
 import { Info } from "@components/ui/Info";
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@providers/TooltipProvider";
 
-// NOTE: original module id: 672706
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/Tooltip";
-
-// NOTE: original module id: 398682
 import { t } from '@components/helpers/translate';
 
 
-// ============================================================================
-// CHUNK 846057 - MEDIA CONSTANTS
-// ============================================================================
 
 export const SHOWREEL_POSTER = "https://annnimate.b-cdn.net/video-thumbnails/kits/menu/menu-showreel_poster.avif";
 export const SHOWREEL_SRC = "https://annnimate.b-cdn.net/video-thumbnails/kits/menu/menu-showreel.mp4";
-
 
 
 const PPP_PLANS = {
@@ -217,9 +190,9 @@ export function FAQSection({
                 </div>
                 {ctaLink ? (
                   <div className="mt-32 hidden lg:flex">
-                    <Button href={ctaLink.href} theme="brand" size="sm">
+                    <AnimatedButton href={ctaLink.href} theme="brand" size="sm">
                       {ctaLink.label}
-                    </Button>
+                    </AnimatedButton>
                   </div>
                 ) : null}
               </div>
@@ -239,9 +212,9 @@ export function FAQSection({
                 </Reveal>
                 {ctaLink ? (
                   <div className="mt-32 flex lg:hidden">
-                    <Button href={ctaLink.href} theme="brand" size="sm">
+                    <AnimatedButton href={ctaLink.href} theme="brand" size="sm">
                       {ctaLink.label}
-                    </Button>
+                    </AnimatedButton>
                   </div>
                 ) : null}
               </div>
@@ -255,18 +228,6 @@ export function FAQSection({
 }
 
 
-// ============================================================================
-// CHUNK 702954 - CheckList COMPONENT
-// ============================================================================
-
-/*
- * MANGLED VARIABLE MAPPING:
- * a -> SIZES_CONFIG
- * e -> items
- * l -> size
- * r -> className
- * n -> itemClassName
- */
 const SIZES_CONFIG = {
   sm: { rect: "size-8 mt-[0.35em]", gap: "gap-12", text: "text-body leading-snug" },
   default: { rect: "size-12 mt-[0.4em]", gap: "gap-16", text: "text-body-lg leading-snug" }
@@ -331,10 +292,10 @@ export function PppLabel({ className = "" }) {
     <TooltipProvider delayDuration={150}>
       <Tooltip>
         <TooltipTrigger asChild={true}>
-          <button type="button" className={`text-mono-sm inline-flex items-center gap-6 text-brand ${className}`}>
+          <AnimatedButton type="button" className={`text-mono-sm inline-flex items-center gap-6 text-brand ${className}`}>
             {t("pricing.tiers.pppName")}
             <Info size={13} />
-          </button>
+          </AnimatedButton>
         </TooltipTrigger>
         <TooltipContent side="top" sideOffset={8} className="max-w-[36ch]">
           <p className="text-body-sm font-sans normal-case leading-relaxed text-foreground">

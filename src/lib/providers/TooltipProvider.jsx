@@ -9,12 +9,7 @@ import React, {
 } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { gsap } from 'gsap';
-
-
-import { cn } from '@utils/cn';
-
-
-
+import { cn } from '@lib/vendor';
 
 
 export const TooltipProvider = TooltipPrimitive.Provider;

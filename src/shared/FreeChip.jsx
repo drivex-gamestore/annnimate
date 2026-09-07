@@ -2,25 +2,15 @@
 
 import React, { useRef, useState, useEffect, Fragment } from "react";
 import { gsap, useGSAP } from "@lib/vendor";
-
 import { Lock } from "@components/assets/icons";
-
 import { useBreakpoint } from "@hooks/useBreakpoint";
-
 import { analytics } from "@lib/analytics/analytics";
-
-import NewsletterForm from "@/components/NewsletterForm";
-
+import NewsletterForm from "@components/NewsletterForm";
 import StarterPackBlock from "@components/ui/StarterPackBlock";
-
 import { KIT_TOUCH_COOKIE, parseFirstTouch } from "@shared/buildKitTouch";
-
 import AnimatedButton from "@animations/components/AnimatedButton";
-
 import NavLink from "@components/NavLink";
-
 import { TESTIMONIALS } from "@components/sections/Testimonials";
-
 import SiteConfig, { effectiveCyclePrice } from "@config/siteConfig";
 
 
