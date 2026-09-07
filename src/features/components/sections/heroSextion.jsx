@@ -42,7 +42,7 @@ import PricingCycleToggle from "@animations/components/PricingCycleToggle";
 import PricingCard from "@components/pricing/PricingCard";
 import ImageLayout from "@components/ImageLayout";
 import RevealHeadline from "@animations/components/RevealHeadline"; 
-import TestimonialsSection from "@components/sections/TestimonialsSection"; 
+import TestimonialsSection from "@components/sections/Testimonials"; 
 import StarterPackSection from "@components/sections/StarterPackSection"; 
 import ShowreelVideo, { JustShipped } from "@components/sections/JustShipped";
 import EndCTA from "@components/sections/EndCTASection";
@@ -55,6 +55,7 @@ import {
   MagnifyingGlass, 
   Funnel, 
   Columns, 
+  GridFour,
   List, 
   Copy, 
   Check 

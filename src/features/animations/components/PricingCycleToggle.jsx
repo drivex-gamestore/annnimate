@@ -17,7 +17,7 @@ export default function PricingCycleToggle({
   const isQuarterly = cycle === "quarterly";
 
   const maxDiscountPercent = (() => {
-    const plans = SiteConfig.stripe?.landingPlans || [];
+    const plans = siteConfig.stripe?.landingPlans || [];
     let maxDiscount = 0;
     
     for (const plan of plans) {

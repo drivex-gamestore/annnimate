@@ -114,7 +114,7 @@ export default function ValueMath({ cta, sectionId = 'value-math' }) {
     },
   ];
 
-  const yearlyPlan = storeConfig.stripe?.landingPlans?.find((e) => e.key === 'solo')?.yearly;
+  const yearlyPlan = siteConfig.stripe?.landingPlans?.find((e) => e.key === 'solo')?.yearly;
   const yearlyPrice = effectiveCyclePrice(yearlyPlan);
 
   return (

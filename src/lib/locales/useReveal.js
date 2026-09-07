@@ -35,6 +35,13 @@ export function useReveal(
     }
   }, [ref]);
 
+  const isInView = useCallback(() => {
+    const el = ref.current;
+    if (!el) return false;
+    const rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }, [ref]);
+
   
   useGSAP(
     () => {
